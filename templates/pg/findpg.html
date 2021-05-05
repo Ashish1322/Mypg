@@ -1,0 +1,99 @@
+{% extends 'mypg/basic.html' %}
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block css %}
+.pg-card {
+        text-decoration: none;
+        color: black;
+    }
+
+    .pg-card:hover {
+        color: black;
+    }
+
+    .box {
+        box-shadow: 5px 10px 7px rgb(151, 149, 149);
+        border: 2px grey;
+
+    }
+
+    .box:hover {
+        box-shadow: 5px 10px 7px rgb(119, 116, 116);
+    }
+{% endblock css %}
+{% block body %}
+
+<div class="container ">
+   <!-- If no results found then give error message of no results found  -->
+    {% if len == 0 %}
+        <div class="my-3 text-center my-5" style="height: 290px">
+        <i class="fa fa-exclamation-triangle fa-5x" ></i>  <h3 style="font-size: 30px"> No results Found !</h3>
+        </div>                                  
+    {% else %}
+    <!-- Show the results -->
+        <div class="row">
+        {% for pg in pgs %}
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 my-3">
+            <a href="{% url 'pgdetail' pg.sno %}" class="pg-card">
+                <div class="card box" style="width: 95%">
+                    <div class="p-1">
+                        <img src="{{pg.thumbnail.url}}"
+                            class="card-img-top" alt="..."  height="180px">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title ">{{pg.name}}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted"><i class="fa fa-map-marker"></i> {{pg.location}}
+                        </h6>
+
+                        <!-- Printing the stars -->
+                      {% for i in range %}
+                            {% if i <= pg.ratings %}
+                                <i style="color: orange;" class="fa fa-star"></i>
+                            {% else %}
+                                <i class="fa fa-star-o"></i>
+                            {% endif %}
+                        {% endfor %} 
+
+                        <span class="badge bg-success mx-2"><i class="fa fa-check"></i> Verified</span>
+                        
+                        
+                        {% if pg.type_pg == "Both" %}
+                        <span class="badge bg-danger"><i class="fa fa-users"></i> boys/girls</span>
+                        {% elif pg.type_pg == "Boys" %}
+                        <span class="badge bg-danger"><i class="fa fa-male"></i> boys</span>
+                        {% else %}
+                        <span class="badge bg-danger"><i class="fa fa-female"></i> girls</span>
+                        {% endif %}
+                        
+                        <hr>
+                        <h4 style="float: left;"><i class="fa fa-rupee"></i> {{pg.price}}/mo</h4>
+
+                        <!-- Booking button only for login user -->
+                        {% if user.is_authenticated %}
+                          <!-- if user is login then check for availability of pg -->
+                          {% if pg.available == 1 %}
+                            <a href="{% url 'bookpgform' pg.sno %}" style="float: right;" class="btn btn-primary ">Book now</a>
+                          {% else %}
+                            <a href="{% url 'pgdetail' pg.sno %}" style="float: right;"  class="btn btn-info ">Not Available</a>
+                          {% endif %}
+                        <!-- if user is not login -->
+                        {% else %}
+                        <button onclick="window.alert('Please Login to Book Pg')"  style="float: right;"  class="btn btn-primary  ">Book now</button>
+                        {% endif %}
+                        
+                    </div> 
+                </div>                              
+            </a>                
+
+    </div>
+
+        {% endfor %}
+        </div>
+</div
+    {% endif %}
+
+
+
+
+
+</div>
+{% endblock body %}

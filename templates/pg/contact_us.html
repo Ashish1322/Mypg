@@ -1,0 +1,176 @@
+{% extends 'mypg/basic.html' %}
+{% block title %}contact us{% endblock title %}
+
+{% block css %}
+
+form.sign-up-form {
+opacity: 1;
+z-index: 1;
+}
+
+
+.input-field {
+
+width: 100%;
+background-color: #f0f0f0;
+margin: 10px 0;
+height: 55px;
+border-radius: 55px;
+display: grid;
+grid-template-columns: 15% 85%;
+padding: 0 0.4rem;
+position: relative;
+}
+.input-field-textarea {
+
+width: 100%;
+background-color: #f0f0f0;
+margin: 10px 0;
+height: 100%;
+border-radius: 30px;
+display: grid;
+grid-template-columns: 15% 85%;
+padding: 0 0.4rem;
+position: relative;
+}
+
+.input-field i {
+text-align: center;
+line-height: 55px;
+color: #acacac;
+transition: 0.5s;
+font-size: 1.1rem;
+}
+.input-field-textarea i {
+text-align: center;
+line-height: 55px;
+color: #acacac;
+transition: 0.5s;
+font-size: 1.1rem;
+}
+
+.input-field input {
+background: none;
+outline: none;
+border: none;
+line-height: 1;
+font-weight: 600;
+font-size: 1.1rem;
+color: #333;
+}
+
+.input-field-textarea textarea {
+background: none;
+outline: none;
+border: none;
+line-height: 1;
+font-weight: 600;
+font-size: 1.1rem;
+color: #333;
+padding-top: 10px;
+}
+
+.input-field input::placeholder {
+color: #aaa;
+font-weight: 500;
+}
+.input-field-textarea textarea::placeholder {
+color: #aaa;
+font-weight: 500;
+
+}
+
+
+.btn {
+width: 150px;
+background-color: #5995fd;
+border: none;
+outline: none;
+height: 49px;
+border-radius: 49px;
+color: #fff;
+text-transform: uppercase;
+font-weight: 600;
+margin: 10px 0;
+cursor: pointer;
+transition: 0.5s;
+}
+
+.btn:hover {
+background-color: #4d84e2;
+}
+.contact-text{
+  color: wheat;
+  font-weight: 500;
+
+}
+.contact-icon{
+  color: #1f9bd7;
+  
+}
+
+
+{% endblock css %}
+{% block btn_on_contact_login %}
+btn_on_contact_login
+{% endblock btn_on_contact_login %}
+{% block contactactive %}
+active
+{% endblock contactactive %}
+{% block body %}
+{% load static %}
+<style>
+  .lih{
+  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 600;
+  color: #6C63FF;
+}
+</style>
+<div class="container ">
+  <div class="text-center">
+    <h2 class="subheadings" style="font-size: 2.3rem; color: black;">Fell free to Talk us.</h2>
+  </div>
+  <div class="row my-3">
+    <div class="col-xl-6 col-sm-12 col-12">
+    <img class="d-flex" width="100%"  src="{% static 'mypg/contact.svg' %}" alt="" >
+    <div class="my-1">
+      <ul style="list-style: none;">
+        <li class="lih"><i class="fa fa-phone fa-rotate-90"></i> +91 7307320365</li>
+        <li class="lih"><i class="fa fa-envelope"></i> a.m2002nov@gmail.com</li>
+        <li class="lih"><i class="fa fa-map-marker"></i> Vill. Jhanjeri, Mohali, Punjab</li>
+      </ul>
+  </div>
+    </div>
+    <div class="col-xl-6 col-sm-12  col-md-last col-12">
+
+      <form action="{% url 'contact' %}" method="POST" class="sign-up-form">
+        {% csrf_token %}
+
+        <div class="input-field">
+          <i class="fas fa-user"></i>
+          <input name="contact_name" type="text" placeholder="Name" required/>
+        </div>
+        <div class="input-field">
+          <i class="fas fa-envelope"></i>
+          <input name="contact_email" type="email" placeholder="Email" required/>
+        </div>
+        <div class="input-field-textarea">
+          <i class="fas fa-comment"></i>
+
+          <textarea name="contact_message" cols="30" placeholder="Message for us" rows="10"></textarea required>
+        </div>
+
+
+        <input type="submit" class="btn" value="submit" />
+
+
+      </form>
+    </div>
+   
+
+
+  </div>
+
+</div>
+{% endblock body %}

@@ -1,0 +1,20 @@
+{% extends 'mypg/basic.html' %}
+{% block termsactive %}footer-active{% endblock termsactive %}
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block body %}
+{% load static %}
+<div class="container">
+ 
+   <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6">
+            <img src="{% static 'other/terms.svg' %}" alt="" width="100%" height="100%">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6">
+            <div class="pt-5">
+        <h3 class="subheadings" style="font-size: 40px;">Terms & Conditions</h3>
+        <p class="para-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis necessitatibus dolorum iusto itaque nihil ad omnis. Aperiam nesciunt debitis voluptatibus fugiat veniam laborum enim molestiae nisi provident, quia iste cum?</p></div>
+        </div>
+      
+    </div>
+</div>
+{% endblock body %}

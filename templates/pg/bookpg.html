@@ -1,0 +1,165 @@
+{% extends 'mypg/basic.html' %}
+{% block title %}Book Pg{% endblock title %}
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block body %}
+{% if user.is_authenticated %}
+<div class="container">
+  <div class="text-center mb-3">
+    <h2 class="headings" style="display: inline; color:#1f9bd7 ; font-size: 40px;">Fill the form and </h2>
+    <h2 class="headings" style="display: inline; color: #a73638; font-size: 40px;">and get your resident.</h2>
+  </div>
+  <div class="row g-5">
+    <div class="col-md-5 col-lg-4 order-md-last">
+      <h3 class="d-flex justify-content-between align-items-center mb-3">
+        <span>Your Choice</span>
+
+
+      </h3>
+      <div class="card box" style="width: 95%">
+        <div class="p-1">
+          <img src="{{pg.thumbnail.url}}" class="card-img-top" alt="..." height="180px">
+        </div>
+        <div class="card-body">
+          <h4 class="card-title ">{{pg.name}}</h4>
+          <h6 class="card-subtitle mb-2 text-muted"><i class="fa fa-map-marker"></i> {{pg.location}}
+          </h6>
+
+          <!-- Printing the stars -->
+          {% for i in range %}
+          {% if i <= pg.ratings %} <i style="color: orange;" class="fa fa-star"></i>
+            {% else %}
+            <i class="fa fa-star-o"></i>
+            {% endif %}
+            {% endfor %}
+
+            <span class="badge bg-success mx-2"><i class="fa fa-check"></i> Verified</span>
+
+
+            {% if pg.type_pg == "Both" %}
+            <span class="badge bg-danger"><i class="fa fa-users"></i> boys/girls</span>
+            {% elif pg.type_pg == "Boys" %}
+            <span class="badge bg-danger"><i class="fa fa-male"></i> boys</span>
+            {% else %}
+            <span class="badge bg-danger"><i class="fa fa-female"></i> girls</span>
+            {% endif %}
+
+            <hr>
+            <h3 class="text-center"><i class="fa fa-rupee"></i> {{pg.price}}/mo</h3>
+            <p class="text-center">Payment will be done at time of shifting</p>
+
+
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="col-md-7 col-lg-8">
+      <h3>Booking Form</h3>
+      <div class="form-text" style="font-size: 18px;">Don't Worry all your details are kept secret.</div>
+      <form class=" my-3" action="{% url 'bookpg' pg.sno %}" method="POST">
+      {% csrf_token %}
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">First name*</label>
+            <input type="text" name="first_name" class="form-control" id="firstName" placeholder="" value="" required>
+
+          </div>
+
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Last name</label>
+            <input name="last_name" type="text" class="form-control" id="lastName" placeholder="" value="">
+
+          </div>
+
+
+          <div class="col-12">
+            <label for="email" class="form-label">Email* </label>
+            <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com" required>
+
+          </div>
+
+          <div class="col-12">
+            <label for="address" class="form-label">Address*</label>
+            <input name="address" type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+
+          </div>
+
+
+          <div class="col-md-5">
+            <label for="phonenumber" class="form-label">Phone Number*</label>
+            <input name="phone_number" id="phonenumber" type="number" class="form-control" id="address" placeholder="7307320365" required>
+
+          </div>
+          <input type="hidden" name="user" value="{{user.username}}">
+          <div class="col-md-4">
+            <label for="state" class="form-label">State*</label>
+            <select name="state" class="form-select" id="state" required>
+              <option value="Andhra Pradesh">Andhra Pradesh</option>
+              <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+              <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+              <option value="Assam">Assam</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Chandigarh">Chandigarh</option>
+              <option value="Chhattisgarh">Chhattisgarh</option>
+              <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+              <option value="Daman and Diu">Daman and Diu</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Lakshadweep">Lakshadweep</option>
+              <option value="Puducherry">Puducherry</option>
+              <option value="Goa">Goa</option>
+              <option value="Gujarat">Gujarat</option>
+              <option value="Haryana">Haryana</option>
+              <option value="Himachal Pradesh">Himachal Pradesh</option>
+              <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+              <option value="Jharkhand">Jharkhand</option>
+              <option value="Karnataka">Karnataka</option>
+              <option value="Kerala">Kerala</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Maharashtra">Maharashtra</option>
+              <option value="Manipur">Manipur</option>
+              <option value="Meghalaya">Meghalaya</option>
+              <option value="Mizoram">Mizoram</option>
+              <option value="Nagaland">Nagaland</option>
+              <option value="Odisha">Odisha</option>
+              <option value="Punjab">Punjab</option>
+              <option value="Rajasthan">Rajasthan</option>
+              <option value="Sikkim">Sikkim</option>
+              <option value="Tamil Nadu">Tamil Nadu</option>
+              <option value="Telangana">Telangana</option>
+              <option value="Tripura">Tripura</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Uttarakhand">Uttarakhand</option>
+              <option value="West Bengal">West Bengal</option>
+            </select>
+
+          </div>
+
+
+          <div class="col-md-3">
+            <label for="zip" class="form-label">Zip*</label>
+            <input name="zip" type="number" class="form-control" id="zip" placeholder="" required>
+
+          </div>
+        </div>
+
+        <div class="col-12 my-3">
+          <label for="college" class="form-label">College Name: <span class="text-muted">(Optional)</span> </label>
+          <input id="college" name="college_name" type="text" class="form-control" id="address">
+        </div>
+        <p class="text-center">After Filling form You will receive a phone call for Confirmation of booking.</p>
+        <button class="w-100 btn btn-primary btn-lg my-3" type="submit">Confirm Boking</button>
+
+
+      </form>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="my-3 text-center my-5" style="height: 290px">
+  <i class="fa fa-exclamation-triangle fa-5x"></i>
+  <h3 style="font-size: 30px">Please Login to book PG</h3>
+</div>
+{% endif %}
+
+{% endblock body %}

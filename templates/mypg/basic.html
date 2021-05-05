@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Acme&family=Permanent+Marker&display=swap" rel="stylesheet">
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    {% block link %}{% endblock link %}
+    <title>{% block title %}{% endblock title %}</title>
+    <style>
+    
+     
+
+      .searchstyle {
+        /* font-family: 'Permanent Marker', cursive; */
+        font-family: 'Acme', sans-serif;
+        font-size: 43px;
+      }
+
+      /* Designing the style for the search button */
+      .input-icons i {
+        position: absolute;
+      }
+
+      .input-icons {
+        /* margin: auto; */
+        width: 70%;
+        margin-bottom: 10px;
+        margin: auto;
+        border: 2px solid green;
+        border-radius: 30px;
+      }
+
+      .icon {
+        padding: 10px;
+
+        min-width: 40px;
+      }
+
+      .input-field {
+        width: 90%;
+        padding: 10px;
+        font-size: 20px;
+        border: none;
+        outline: none;
+      }
+
+      .headings {
+        font-family: 'Righteous', cursive;
+        font-size: 42px;
+
+      }
+
+      .subheadings {
+        font-family: 'Ubuntu', sans-serif;
+        color: rgb(85, 79, 79);
+        font-weight: 700;
+      }
+
+      .smallpara {
+        font-size: 20px;
+      
+        color: rgb(47, 46, 46);
+      }
+      .why-icon {
+        font-size: 20px;
+        margin-right: 15px;
+        color: rgb(114, 114, 221);
+        /* color: rgb(112, 172, 112); */
+      }
+      .li-items{
+        font-size: 17px;
+       
+        text-decoration: none;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: rgb(59, 56, 56);
+      }
+      .card-style{
+        background-color: #f7faff;
+        border-radius: 10px;
+      }
+  
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+.para-font{
+    font-size: 22px;
+}
+.footer-text{
+  text-decoration: none; 
+  color: rgb(184, 181, 181);
+  font-size: 20px;
+}
+.footer-active{
+  color: white;
+}
+.footer-text:hover{
+  color: white;
+}
+.btn_on_contact_login {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+.btnh{
+  text-decoration: none;
+  color: #fff;
+  background-color: transparent;
+  padding: .375rem .75rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    font-weight: 600;
+    
+  
+}
+.btnh:hover{
+  color: white;
+  font-weight: 700;
+}
+    {% block css %}{% endblock css %}
+      /* ******************* END HERE ***************************** */
+
+    </style>
+    
+
+
+  </head>
+  <body>
+{% load static %}
+<div class="mb-3">
+<nav class="navbar py-2 navbar-expand-md navbar-dark " style="background-color: rgb(68, 67, 67);" aria-label="Fourth navbar example">
+  <div class="container-fluid py-1">
+    <a class="navbar-brand" href="#">Expand at md</a>
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbarsExample04" style="font-size: 19px;">
+      <ul class="navbar-nav me-auto mb-2 mb-md-0">
+        <li class="nav-item">
+          <a class="nav-link {% block homeactive %}{% endblock homeactive %}" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="{% url 'about' %}">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% block contactactive %}{% endblock contactactive %} " href="{% url 'contact' %}" tabindex="-1" >Contact us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% block registeractive %}{% endblock registeractive %}" href="{% url 'registerpg' %}" tabindex="-1" >Register Pg</a>
+        </li>
+        
+      </ul>
+      {% if user.is_authenticated %}
+       <a class="btnh" href="{% url 'userview' user.username %}"><i class="fa fa-user"></i> {{user.first_name}}</a>
+      {% else %}
+       <a class=" btn-primary {% block btn_on_contact_login %}{% endblock btn_on_contact_login %}" href="{% url 'login' %}">Login/SignUp</a>
+      {% endif %}
+     
+    </div>
+    
+  </div>
+</nav>
+</div>
+      {% for message in messages %}
+      <div class="alert container alert-{{message.tags}} alert-dismissible fade show " role="alert">
+    <strong>Message: </strong> {{message}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+      {% endfor %}
+    
+    
+    {% block body %}{% endblock body %}
+     <footer style="background-color: rgb(26, 24, 24);" class="mt-2"> 
+    <div class="container-fluid py-1">
+      
+        <div class="row text-center">
+          <div class="col-12 col-sm-6 col-md-6 col-xl-6"> <a  class="nav-link  {% block termsactive %}{% endblock termsactive %} footer-text" aria-current="page" href="{% url 'conditions' %}">Terms & Conditions</a></div>
+          <div class="col-12 col-sm-6 col-md-6 col-xl-6"> 
+            <a class="nav-link {% block policyactive %}{% endblock policyactive %} footer-text" href="{% url 'policy' %}">Privacy Policy</a></div>
+        </div>
+    
+      </div
+    </footer>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"></script>
+      {% block js %}{% endblock js %}
+  </body>
+
+</html>

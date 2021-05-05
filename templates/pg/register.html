@@ -1,0 +1,77 @@
+{% extends 'mypg/basic.html' %}
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block registeractive %}active{% endblock registeractive %}
+{% block body %}
+<div class="container">
+    {% load static %}
+    <div class="text-center ">
+        <h1 class="headings" style="color: rgb(27, 26, 26); font-size: 45px;">Grow your Business with us.</h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6">
+            <img src="{% static 'other/register2.svg' %}" alt="" width="100%" height="100%">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 ">
+            <div class="pt-4">
+                <h3 class="subheadings" style="font-size: 35px;">Register your Pg Now</h3>
+                <p class="para-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis necessitatibus
+                    dolorum iusto itaque nihil ad omnis. Aperiam nesciunt debitis voluptatibus fugiat veniam laborum
+                    enim molestiae nisi provident, quia iste cum?</p>
+               
+            </div>
+            <div>
+                <h4 class="subheadings" style="font-size: 25px;">How it's works ?</h4>
+                <ul class="para-font" style="list-style: none;">
+                    <li><i class="fa fa-hand-o-right"></i> Register your Pg.</li>
+                    <li><i class="fa fa-hand-o-right"></i> Your Pg will be visited by us and verified.</li>
+                    <li><i class="fa fa-hand-o-right"></i> That's all done Your Pg get's registerd</li>
+                    
+                    
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-5">
+        
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 ">
+            <div class="pt-4">
+                <h3 class="subheadings" style="font-size: 35px;">Fill the form and get listed.</h3>
+          
+                <form class="mt-3" action="{% url 'registerpg' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <input type="text" name="owner_name" class="form-control" id="owner_name"  required placeholder="Name of Pg Owner">
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" name="pgname" class="form-control" id="pgname" required placeholder="Name of Pg">
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" name="location" class="form-control" id="location"  required placeholder="Location of Pg">
+                    </div>
+                    <div class="mb-3">
+                      <input type="number" name="phone_number" class="form-control" id="phone_number"  required placeholder="Phone number">
+                    </div>
+                    <select  name="typepg" class="form-select mb-3" id="typepg" required>
+                        
+                        <option value="both">Boys/Girls</option>
+                        <option value="boys">Boys</option>
+                        <option value="girls">Girls</option>
+                    </select>
+                    <div class="mb-3">
+                        
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder="Description about PG " required></textarea>
+                      </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                  </form>
+                
+            </div>
+           
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 order-first order-md-last order-xl-last">
+            <img src="{% static 'other/register1.svg' %}" alt="" width="100%" height="100%">
+        </div>
+
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,317 @@
+{% extends 'mypg/basic.html' %}
+{% block title %}Welcome to MyPg{% endblock title %}
+{% block homeactive %}active{% endblock homeactive %}
+
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+
+{% block css %}
+.btn_shortcut{
+  border-right: 2px solid rgb(63, 61, 61);
+  border-bottom: 2px solid rgb(63, 61, 61);
+}
+.card-ss{
+  width: 18rem; 
+  border: 2px solid black;
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 75px;
+  box-shadow: 2px 3px 8px black;
+
+  }
+  .input-field {
+
+width: 90%;
+
+background-color: whitesmoke;
+margin: 10px 0;
+height: 55px;
+border-radius: 55px;
+display: grid;
+grid-template-columns: 15% 85%;
+padding: 0 0.4rem;
+position: relative;
+border: 2px solid green; box-shadow: 2px 3px 6px  green;
+}
+.input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: #0e0d0d;
+  transition: 0.5s;
+  font-size: 1.8rem;
+  }
+.input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    }
+.input-field input::placeholder {
+      color: #aaa;
+      font-weight: 500;
+      } 
+
+      
+  
+{% endblock css %}
+{% block body %}
+<!-- Carousel Items -->
+{% load static %}
+ <style>
+   .car-head{
+     font-size: 4.5vw;
+     color: black;
+     text-align: left;
+     padding: 5px;
+     
+   }
+   .grad{
+     background-image: linear-gradient(#ddd6f3 , #faaca8);
+   }
+ </style>
+<div class="container my-3">
+  <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="4500">
+        <div class="row grad" >
+          <div class="col-md-5 col-xl-5 col-sm-12 col-12 my-auto">
+            <h1 class="subheadings car-head " style="color: #6c63ff;">Being Tired of Finding Pg's.</h1>
+          
+          </div>
+          <div class="col-md-7 col-xl-7 col-sm-12 col-12">
+            <img src="{% static 'mypg/tired_finding_pg.svg' %}" width="100%" height="100%" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="4500">
+        <div class="row grad" >
+          <div class="col-md-7 col-xl-7 col-sm-12 col-12 order-last order-sm-last order-md-first order-xl-first " >
+            <img src="{% static 'mypg/wastingtime.svg' %}" width="100%" height="100%" alt="">
+          </div>
+          <div class="col-md-5 col-xl-5 col-sm-12 col-12 my-auto">
+            <h1 class="subheadings car-head " style="color: #6c63ff;">Why to waste time and money on finding Pg ?</h1>
+          
+          </div>
+          
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="4500">
+        <div class="row grad" >
+          <div class="col-md-5 col-xl-5 col-sm-12 col-12 my-auto">
+            <h1 class="subheadings car-head " style="color: #6c63ff;">Don't Worry it's easy to find Pg with us.</h1>
+          
+          </div>
+          <div class="col-md-7 col-xl-7 col-sm-12 col-12 "  >
+            <img src="{% static 'mypg/itseasy.svg' %}" height="80%"  width="80%"  alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
+<!-- Search Bar -->
+<div class="container">
+  <form action="{% url 'findpg' %}" method="POST">
+  {% csrf_token %}
+  <div class="input-field">
+    <i class="fas fa-search"></i>
+    <input name="query" type="text" placeholder="Search for pg" required />
+  </div>
+</form>
+
+</div>
+
+<!-- Fast Search -->
+<div class="container my-1 text-center">
+  <h5>Fast Search</h5>
+  <!-- Here the 1000 refer to to the boys and 2000 refer to all pgs and 3000 refers to the girls only
+  because we are sending this values in our view function so there we can recognize weather the results shown boys,girl or both. -->
+  <a href="{% url 'quicksearch' 'for-boys-only' %}" class="btn badge bg-success btn_shortcut">Boys Only</a>
+  <a href="{% url 'quicksearch' 'for-boys-girls' %}" class="btn badge bg-success btn_shortcut">All Pgs</a>
+  <a href="{% url 'quicksearch' 'for-girls-only' %}" class="btn badge bg-success btn_shortcut">Girls only</a>
+
+</div>
+
+<!-- Who we are -->
+<section >
+  <div class="container my-3 py-3">
+    <div class="text-center">
+      <h2 class="headings" style="display: inline; color:#1f9bd7 ;">Who w</h2>
+      <h2 class="headings" style="display: inline; color: #a73638;">e Are ?</h2>
+    </div>
+    <div class="row m-50 my-2">
+      <div class="col-12 col-lg-6 order-lg-last   d-flex align-items-center justify-content-center"
+        style="float: right;">
+        <img src="{% static 'other/who2.svg' %}" alt="homeWhypgoCharacter" height="90%" width="90%">
+      </div>
+      <div class="col-12 col-lg-6 mt-2">
+        <h3 class="subheadings">About us</h3>
+        <p class="smallpara">We are here to help you in finding the best and affordable pg in a few steps and without
+          any investment. We can provide different types of servies a free of cost. We are providing free facilities to
+          the stuendt to find their residance Easily when they are away from their home. </p>
+        <h4 class="subheadings">Our Aim</h4>
+        <p class="smallpara">When a student came from other cities they have one mojor problem of residance because they
+          doesn't know anything about city. So now it's our responsibility to provide them best residance so that they
+          can fee like a home</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- What we offer  -->
+<section>
+  <div class="container my-3">
+    <div class="text-center">
+      <h2 class="headings" style="display: inline; color:#1f9bd7 ;">What w</h2>
+      <h2 class="headings" style="display: inline; color: #a73638;">e Offer ?</h2>
+    </div>
+    <div class="row m-50 my-4">
+
+      <div class="col-12 col-lg-6  d-flex align-items-center justify-content-center">
+        <img src="{% static 'mypg/offer.jpg' %}" alt="homeWhypgoCharacter" width="95%" height="90%">
+      </div>
+      <div class="col-12 col-lg-6">
+        <ul>
+          <li class=" d-flex">
+            <div class="why-icon">
+              <i class="fa fa-money fa-3x"></i>
+            </div>
+            <div>
+              <h3 class="subheadings">Pocket friendly 100% free Service</h3>
+              <p class="smallpara">No commuting to multiple locations, no brokerage fee, we provide 100% free Service
+                because you deserve the best. </p>
+            </div>
+          </li>
+          <li class=" d-flex">
+            <div class="why-icon">
+              <i class="fa fa-home fa-3x"></i>
+            </div>
+            <div>
+              <h3 class="subheadings">Choose from the list of best pg's </h3>
+              <p class="smallpara">We provide you all the best and affordable pg's and you have to select according to
+                your needs.</p>
+            </div>
+          </li>
+          <li class=" d-flex">
+            <div class="why-icon">
+              <i class="fa fa-inbox fa-3x"></i>
+            </div>
+            <div>
+              <h3 class="subheadings">Tiffen Service</h3>
+              <p class="smallpara">We know you are away from home but its our responsibility to provide you good and
+                healthy meal.</p>
+            </div>
+          </li>
+
+          <li class=" d-flex">
+            <div class="why-icon ">
+              <i class="fa fa-user fa-3x"></i>
+            </div>
+            <div>
+              <h3 class="subheadings">Shifting Guide & 24x7 Support</h3>
+              <p class="smallpara">New in the city don't worry we provide you a shifting guide to help. We are here to
+                help you in any problem with our 24x7 support. </p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class=" text-center  " >
+  <div class="container my-4 py-5">
+
+
+    <h2 class="headings" style="display: inline; color:#1f9bd7 ;">How it</h2>
+    <h2 class="headings" style="display: inline; color: #a73638;">'s Work ?</h2>
+
+    <div class="row mt-3">
+      <div class="col-md-4 " style="margin-top: auto;">
+        <div class="hiw-icon"> <i class="fa fa-search fa-5x" style="color: #1f9bd7"></i> </div>
+        <h3 class="subheadings">Search for PG</h3>
+        <p class="smallpara">Fill your city, type of pg like boys or girls or name of pg in the search bar.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="hiw-icon"> <img
+            src="https://1.bp.blogspot.com/-tgv7phBGSAU/YHbaR4X3amI/AAAAAAAABFA/fOuEKI48wk0HbS615OVcpGlWNPZsNZ18ACLcBGAsYHQ/s0/hiw-icon-02.png"
+            alt=""> </div>
+        <h3 class="subheadings">Select PG and fill form</h3>
+        <p class="smallpara">Select one of the best pg's available and fill the booking form of that pg.</p>
+      </div>
+      <div class="col-md-4">
+        <div class="hiw-icon"> <img
+            src="https://1.bp.blogspot.com/-lsmlHQFM7CE/YHbaP371LDI/AAAAAAAABE8/JYb0TyYGiqIsv_kXV-V0UhJWDQkp6IEFQCLcBGAsYHQ/s0/hiw-icon-03.png"
+            alt=""> </div>
+        <h3 class="subheadings">Booking Confirmation</h3>
+        <p class="smallpara">You will receive a Confirmation call within 5 minutes after filling form.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- what people say abouts us -->
+<section class=" text-center ">
+  <div class="container my-4">
+
+
+    <h2 class="headings" style="display: inline; color:#1f9bd7 ;">What people </h2>
+    <h2 class="headings" style="display: inline; color: #a73638;">say about us ?</h2>
+
+    <div id="carouselExampleControls" class="carousel slide my-3" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active " data-bs-interval="3000">
+          
+          <div class="card mx-auto card-ss"  >
+            <div class="card-body card-style " style="background-color: #FFF6A1; color: black;">
+              <h5 class="card-title">Name</h5>
+              <h6 class="card-subtitle mb-2 text-muted"> <i class="fa fa-location-arrow"></i> Location</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item  " data-bs-interval="3000">
+          
+          <div class="card mx-auto card-ss"  >
+            <div class="card-body card-style " style="background-color: #FFF6A1; color: black;">
+              <h5 class="card-title">Name</h5>
+              <h6 class="card-subtitle mb-2 text-muted"> <i class="fa fa-location-arrow"></i> Location</h6>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+       <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleControls"
+        data-bs-slide="prev" >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next " type="button" data-bs-target="#carouselExampleControls"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+
+
+
+
+{% endblock body %}

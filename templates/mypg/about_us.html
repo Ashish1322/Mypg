@@ -1,0 +1,70 @@
+{% extends 'mypg/basic.html' %}
+{% block aboutactive %}active{% endblock aboutactive %}
+
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block css %}
+.para-font{
+    font-size: 22px;
+}
+.faces{
+    width: 140px;
+    height: 140px;
+    border: 1px solid lightblue;
+    border-radius: 50px;
+}
+{% endblock css %}
+{% block body %}
+<div class="container">
+{% load static %}
+
+<div class="container text-center my-3"><h2 class="subheadings" style="color: rgb(27, 26, 26); font-size: 45px;">Company Name</h2></div>
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 ">
+            <div class="pt-5">
+        <h3 class="subheadings" style="font-size: 40px;">Who We Are ?</h3>
+        <p class="para-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis necessitatibus dolorum iusto itaque nihil ad omnis. Aperiam nesciunt debitis voluptatibus fugiat veniam laborum enim molestiae nisi provident, quia iste cum?</p></div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 ">
+            <img src="{% static 'other/who.svg' %}" alt="" width="90%">
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6 order-sm-last  order-md-first order-last">
+            <img src="{% static 'other/mission.svg' %}" alt="" width="100%" height="100%">
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6">
+            <div class="pt-5">
+        <h3 class="subheadings" style="font-size: 40px;">Our Mission ?</h3>
+        <p class="para-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis necessitatibus dolorum iusto itaque nihil ad omnis. Aperiam nesciunt debitis voluptatibus fugiat veniam laborum enim molestiae nisi provident, quia iste cum?</p></div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6">
+            <div class="pt-5">
+        <h3 class="subheadings" style="font-size: 40px;">Why Choose us ?</h3>
+        <p class="para-font">Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis necessitatibus dolorum iusto itaque nihil ad omnis. Aperiam nesciunt debitis voluptatibus fugiat veniam laborum enim molestiae nisi provident, quia iste cum?</p></div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-xl-6">
+            <img src="{% static 'other/whyus.svg' %}" alt="" width="100%" height="100%">
+        </div>
+    </div>
+
+</div>
+
+<div class="container my-5">
+    <h3 class="subheadings text-center" style="font-size: 35px;">Faces Behind the Company</h3>
+ 
+    <div class="row text-center my-4">
+        <div class="col-md-6 col-12 col-sm-6 col-xl-6">
+            <img class="faces" src="{% static 'other/who.svg' %}" alt="" >
+            <h3 class=" mt-2" style="color: rgb(61, 57, 57);">Nitin Handa</h3>
+            <p>(CO-FOUNDER)</p>
+        </div>
+        <div class="col-md-6 col-12 col-sm-6 col-xl-6"><img class="faces" src="{% static 'other/who.svg' %}" alt="" ><h3 class=" mt-2" style="color: rgb(61, 57, 57);">Ashish Kumar
+        </h3><p>(CO-FOUNDER)</p>
+        </div>
+        
+    </div>
+</div>
+{% endblock body %}
