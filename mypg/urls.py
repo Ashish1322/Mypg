@@ -29,6 +29,7 @@ urlpatterns = [
     path('conditions/', views.conditions,name="conditions"),
     path('pg/', include('pg.urls')),
 
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

@@ -1,9 +1,20 @@
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
-from .models import Contact,Pg,Images,Booking,RegisterPg
+from .models import Contact,Pg,Images,Booking,RegisterPg,Testmotional
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 
+def testm(request):
+    if(request.method=="POST"):
+        testmotional = request.POST['testmotional']
+        uservalue = request.POST['user']
+        user = User.objects.get(username=uservalue)
+        test = Testmotional(user=user,test=testmotional)
+        test.save()
+        messages.success(request,"Thanks for sharing your view with us.")
+    
+    return render(request,'pg/testmotional.html')
+    
 
 def contact(request):
     if(request.method=="POST"):
@@ -69,15 +80,15 @@ def pgdetail(request,slug):
 def quicksearch(request,slug):
     if(slug == "for-boys-only"):
         pgs = Pg.objects.filter(type_pg = "Boys")
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6)})
+        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys"})
 
     elif(slug == "for-boys-girls"):
         pgs = Pg.objects.all()
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6)})
+        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys & Girls"})
 
     elif(slug == "for-girls-only"):
         pgs = Pg.objects.filter(type_pg = "Girls")
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6)})
+        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Girls"})
 
     return HttpResponse("404 Error")
 

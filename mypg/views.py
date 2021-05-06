@@ -3,9 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.shortcuts import redirect
+from pg.models import Pg,recommended,Testmotional
 
 def home(request):
-    return render(request,'mypg/home.html')
+    r_pg = recommended.objects.all()
+    testmotional = Testmotional.objects.all()
+    # range is to print stars on the card of pg
+    return render(request,'mypg/home.html',{'pgs':r_pg,'range':range(1,6),'len':len(r_pg),'testmotionals':testmotional,'len2':len(testmotional)})
 
 def login_user(request):
     if(request.method=="POST"):

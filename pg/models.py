@@ -23,7 +23,7 @@ class Pg(models.Model):
     type_pg = models.CharField(max_length=50,choices=type_choices,default='Both')
     description = models.TextField()
     distance = models.CharField(max_length=1000,default="")
-   
+    
     verified = models.BooleanField()
     price = models.IntegerField()
     phone_number = models.IntegerField()
@@ -86,4 +86,16 @@ class RegisterPg(models.Model):
 
     def __str__(self):
         return self.name
+
+class recommended(models.Model):
+    pg = models.ForeignKey(Pg,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.pg.name
+
+class Testmotional(models.Model):
+    sno = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    test = models.TextField()
+    def __str__(self):
+        return self.user.username
     

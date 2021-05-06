@@ -27,4 +27,5 @@ urlpatterns = [
      path('changedetails/<str:slug>', views.change_details,name="changedetails"),
      path('changepassword/<str:slug>', views.changepassword,name="changepassword"),
      path('registerpg/', views.registerpg,name="registerpg"),
+     path('testmotional',views.testm,name="testmotional"),
 ]
