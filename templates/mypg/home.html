@@ -164,14 +164,14 @@ font-weight: 500;
   <h5>Fast Search</h5>
   <!-- Here the 1000 refer to to the boys and 2000 refer to all pgs and 3000 refers to the girls only
   because we are sending this values in our view function so there we can recognize weather the results shown boys,girl or both. -->
-  <a href="{% url 'quicksearch' 'for-boys-only' %}" class="btn q-button">Boys Only</a>
-  <a href="{% url 'quicksearch' 'for-boys-girls' %}" class="btn q-button">All Pgs</a>
-  <a href="{% url 'quicksearch' 'for-girls-only' %}" class="btn  q-button">Girls only</a>
+  <a href="{% url 'quicksearch' 'for-boys-only' %}" class="btn q-button"><i class="fa fa-male"></i> Boys Only</a>
+  <a href="{% url 'quicksearch' 'for-boys-girls' %}" class="btn q-button"><i class="fa fa-users"></i> All Pgs</a>
+  <a href="{% url 'quicksearch' 'for-girls-only' %}" class="btn  q-button"><i class="fa fa-female"></i> Girls only</a>
 
 </div>
 
 <!-- Recommende by us -->
-<div class="container my-3">
+<div class="container my-3 ">
   <hr>
   <h2 class="subheadings text-center" style="color: #1f9bd7;">Recommended by us.</h2>
   <p class="text-center" style="font-size: 20px; font-weight: 500;">Best affordable Pg's.</p>
