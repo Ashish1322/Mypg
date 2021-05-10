@@ -18,6 +18,16 @@ from django.urls import path,include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
+# For authentication urls
+# accounts/logout/ [name='logout']
+# accounts/password_change/ [name='password_change']
+# accounts/password_change/done/ [name='password_change_done']
+# accounts/password_reset/ [name='password_reset']
+# accounts/password_reset/done/ [name='password_reset_done']
+# accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
+# accounts/reset/done/ [name='password_reset_complete']
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name="home"),
@@ -28,6 +38,11 @@ urlpatterns = [
     path('policy/', views.policy,name="policy"),
     path('conditions/', views.conditions,name="conditions"),
     path('pg/', include('pg.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='mypg/password_reset_done.html'), name='password_reset_done'),
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name="mypg/password_reset_confirm.html"), name='password_reset_confirm'),
+    path('reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='mypg/password_reset_complete.html'), name='password_reset_complete'),  
+    path("password_reset", views.password_reset_request, name="password_reset")
 
 
 ]
