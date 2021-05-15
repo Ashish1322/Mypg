@@ -28,4 +28,5 @@ urlpatterns = [
      path('changepassword/<str:slug>', views.changepassword,name="changepassword"),
      path('registerpg/', views.registerpg,name="registerpg"),
      path('testmotional',views.testm,name="testmotional"),
+     path('cancelorder/<int:sno>',views.cancel,name="cancel"),
 ]

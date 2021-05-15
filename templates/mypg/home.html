@@ -169,6 +169,16 @@ font-weight: 500;
   <a href="{% url 'quicksearch' 'for-girls-only' %}" class="btn  q-button"><i class="fa fa-female"></i> Girls only</a>
 
 </div>
+<!-- Available cities -->
+<div class="container my-2 text-center">
+  <h5>Available Locations</h5>
+  <!-- Here the 1000 refer to to the boys and 2000 refer to all pgs and 3000 refers to the girls only
+  because we are sending this values in our view function so there we can recognize weather the results shown boys,girl or both. -->
+  <a href="{% url 'quicksearch' 'Jhanjeri' %}" class="btn q-button"><i class="fa fa-map-marker"></i> Jhanjeri, Mohali</a>
+  <a href="{% url 'quicksearch' 'Landra' %}" class="btn q-button"><i class="fa fa-map-marker"></i> Landra, Mohali</a>
+  
+
+</div>
 
 <!-- Recommende by us -->
 <div class="container my-3 ">

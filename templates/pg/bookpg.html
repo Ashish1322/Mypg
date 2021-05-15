@@ -45,7 +45,7 @@
 
             <hr>
             <h3 class="text-center"><i class="fa fa-rupee"></i> {{pg.price}}/mo</h3>
-            <p class="text-center">Payment will be done at time of shifting</p>
+          
 
 
         </div>
@@ -146,6 +146,11 @@
         <div class="col-12 my-3">
           <label for="college" class="form-label">College Name: <span class="text-muted">(Optional)</span> </label>
           <input id="college" name="college_name" type="text" class="form-control" id="address">
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" name="terms" class="form-check-input" id="exampleCheck1" required>
+          <label class="form-check-label" for="exampleCheck1">I accept all the <a target="_blank" href="{% url 'conditions'  %}"> Terms and Conditions.</a></label>
+          <div class="form-text">Please read Terms and conditions carefully before Accepting. </div>
         </div>
         <p class="text-center">After Filling form You will receive a phone call for Confirmation of booking.</p>
         <button class="w-100 btn btn-primary btn-lg my-3" type="submit">Confirm Boking</button>

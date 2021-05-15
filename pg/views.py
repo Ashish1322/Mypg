@@ -78,6 +78,13 @@ def pgdetail(request,slug):
  
 
 def quicksearch(request,slug):
+    if(slug=="Jhanjeri"):
+        pgs = Pg.objects.filter(location__contains = "Jhanjeri")
+        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys"})
+    if(slug=="Landra"):
+        pgs = Pg.objects.filter(location__contains = "Landra")
+        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys"})
+
     if(slug == "for-boys-only"):
         pgs = Pg.objects.filter(type_pg = "Boys")
         return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys"})
@@ -116,8 +123,8 @@ def book_pg(request,slug):
         user = User.objects.get(username=username)
         # Checking if the user has already booked 3 pgs because more than three pgs are not booked at same account
         no_of_pending = Booking.objects.filter(user=user,order_confirmed=0)
-        if(len(no_of_pending)==3):
-            messages.error(request,"Booking Failed because you cannot have more then 3 pending orders, So please try later !")
+        if(len(no_of_pending)==2):
+            messages.error(request,"Booking Failed because you cannot have more then 2 pending orders, So please try later !")
             return redirect('home')
         elif (len(str(phonenumber))!=10):
             messages.error(request,'Invalid Phone number!')
@@ -206,3 +213,18 @@ def registerpg(request):
         return redirect('registerpg')
 
     return render(request,'pg/register.html')
+
+def cancel(request,sno):
+    
+    try:
+        order = Booking.objects.get(sno=sno)
+        username = order.user.username
+        order.delete()
+        messages.success(request,"Order Deleted Successfuly")
+        return redirect('userview',username)
+    except Exception as e:
+        messages.error(request,"Some error Occured Please try agian.")
+        return redirect('home')
+    
+# 'abc
+# 1111'
