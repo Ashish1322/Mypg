@@ -91,10 +91,52 @@
         </div>
     </div>
     {% endif %}
+    <div class="container">
+        <hr>
+    <nav aria-label="Page navigation example">
+        <!-- pgs is the page object of paginator -->
+        <ul class="pagination justify-content-center">
+        {% if pgs.has_previous %}
+        <li class="page-item ">
+            <a class="page-link"  href="?page={{pgs.previous_page_number}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link"  href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+        {% endif %}
+          
 
-
-
-
-
+          {% for page in page_range %}
+          
+          <!-- {% comment %} pgs is the page of paginator class whihc occupir all the pgs in current page and pgs.number will give us number of current page {% endcomment %} -->
+          {% if page == pgs.number %}
+           <li class="page-item active" aria-current="page"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% else %}
+           <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+          {% endif %}
+         
+          {% endfor %}
+          {% if pgs.has_next %}
+           <li class="page-item">
+            <a class="page-link" href="?page={{pgs.next_page_number}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% else %}
+           <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+          {% endif %}
+         
+        </ul>
+      </nav>
+    </div>
 </div>
 {% endblock body %}

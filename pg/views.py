@@ -3,7 +3,7 @@ from django.contrib import messages
 from .models import Contact,Pg,Images,Booking,RegisterPg,Testmotional
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-
+from django.core.paginator import Paginator
 def testm(request):
     if(request.method=="POST"):
         testmotional = request.POST['testmotional']
@@ -15,7 +15,6 @@ def testm(request):
     
     return render(request,'pg/testmotional.html')
     
-
 def contact(request):
     if(request.method=="POST"):
         name = request.POST['contact_name']
@@ -35,7 +34,6 @@ def contact(request):
         return redirect('contact')
 
     return render(request,'pg/contact_us.html')
-
 
 def findpg(request):
     if(request.method=="POST"):
@@ -78,37 +76,40 @@ def pgdetail(request,slug):
  
 
 def quicksearch(request,slug):
+    pgs = []
     if(slug=="Jhanjeri"):
         pgs = Pg.objects.filter(location__contains = "Jhanjeri")
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys"})
-    if(slug=="Landra"):
-        pgs = Pg.objects.filter(location__contains = "Landra")
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys"})
+        
 
-    if(slug == "for-boys-only"):
+    elif(slug=="Landra"):
+        pgs = Pg.objects.filter(location__contains = "Landra")
+        
+
+    elif(slug == "for-boys-only"):
         pgs = Pg.objects.filter(type_pg = "Boys")
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys"})
+        
 
     elif(slug == "for-boys-girls"):
         pgs = Pg.objects.all()
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys & Girls"})
+        
 
     elif(slug == "for-girls-only"):
         pgs = Pg.objects.filter(type_pg = "Girls")
-        return render(request,'pg/findpg.html',{'pgs':pgs,'len':len(pgs),'range':range(1,6),'for':"Pg's for Girls"})
-
-    return HttpResponse("404 Error")
-
+        
+    else:
+        return HttpResponse("404 Error")
+    p = Paginator(pgs,6)
+    page_number = request.GET.get('page')
+    pgs_page = p.get_page(page_number)
+    return render(request,'pg/findpg.html',{'pgs':pgs_page,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys",'page_range':p.page_range,})
 
 def book_pg_form(request,slug):
     pg = Pg.objects.get(sno=slug)
     # Range is to print stars
     return render(request,'pg/bookpg.html',{'pg':pg,'range':range(1,6)})
 
-
 def book_pg(request,slug):
     if(request.method=="POST"):
-        
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
         email = request.POST['email']
@@ -129,7 +130,6 @@ def book_pg(request,slug):
         elif (len(str(phonenumber))!=10):
             messages.error(request,'Invalid Phone number!')
             return redirect('home')
-
         
         order = Booking(first_name=first_name,last_name=last_name,email=email,address=address,phone_number=phonenumber,state=state,zip_code=zip_code,college=college,pg=pg,user=user,order_confirmed=0)
         order.save()
@@ -142,6 +142,7 @@ def userview(request,slug):
     user = User.objects.get(username=slug)
     if(user.is_authenticated):
         pending_orders = Booking.objects.filter(user=user,order_confirmed=0)
+
         # return HttpResponse(pending_orders)
         confirmed_orders = Booking.objects.filter(user=user,order_confirmed=1)
 
@@ -225,6 +226,3 @@ def cancel(request,sno):
     except Exception as e:
         messages.error(request,"Some error Occured Please try agian.")
         return redirect('home')
-    
-# 'abc
-# 1111'
