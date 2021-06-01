@@ -3,6 +3,8 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 import os
 # Create your models here.
+
+# Database to store contacts
 class Contact(models.Model):
     sno = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
@@ -12,6 +14,7 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+# Database to store pgs
 class Pg(models.Model):
     type_choices = (
         ("Girls","girls"),
@@ -23,7 +26,6 @@ class Pg(models.Model):
     type_pg = models.CharField(max_length=50,choices=type_choices,default='Both')
     description = models.TextField()
     distance = models.CharField(max_length=1000,default="")
-    
     verified = models.BooleanField()
     price = models.IntegerField()
     phone_number = models.IntegerField()
@@ -36,6 +38,7 @@ class Pg(models.Model):
     def __str__(self):
         return str(self.sno) +" "+ (self.name)[0:10]
 
+# To delete all the photo files of a pg when pg is removed from database
 @receiver(models.signals.post_delete, sender=Pg)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """
@@ -46,12 +49,14 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
         if os.path.isfile(instance.thumbnail.path):
             os.remove(instance.thumbnail.path)
 
+# To store images of all the pgs and are related using forigen key
 class Images(models.Model):
     pg = models.ForeignKey(Pg,default=None,on_delete=models.CASCADE)
     imgae = models.ImageField(upload_to="images_pg/")
     def __str__(self):
         return self.pg.name
     
+# Function to Store Bookings of the pgs
 class Booking(models.Model):
     sno = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=40,default=" ")
@@ -63,12 +68,12 @@ class Booking(models.Model):
     zip_code = models.IntegerField()
     college = models.CharField(max_length=200,default=" ")
     order_confirmed = models.BooleanField()
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-    pg = models.ForeignKey(Pg,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE) # To store order corrspond to which user
+    pg = models.ForeignKey(Pg,on_delete=models.CASCADE) # Which pg is booked by user
     def __str__(self):
         return self.user.username
     
-
+# To register pg by someone
 class RegisterPg(models.Model):
     type_choices = (
         ("Girls","girls"),
@@ -87,11 +92,13 @@ class RegisterPg(models.Model):
     def __str__(self):
         return self.name
 
+# Small database which are recommended
 class recommended(models.Model):
     pg = models.ForeignKey(Pg,on_delete=models.CASCADE)
     def __str__(self):
         return self.pg.name
 
+# databasse to store tesmtionals
 class Testmotional(models.Model):
     sno = models.AutoField(primary_key=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)

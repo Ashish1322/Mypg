@@ -15,7 +15,7 @@ import os
 from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-#DataFlair
+# For sending emails to the user forggeten password
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
@@ -82,6 +82,7 @@ WSGI_APPLICATION = 'mypg.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+# MysQl database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
