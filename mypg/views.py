@@ -1,3 +1,5 @@
+# Importing some required libraries
+from email.message import EmailMessage
 from django.shortcuts import render,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout,authenticate
@@ -14,13 +16,16 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from mypg.settings import EMAIL_HOST_USER
-
+import smtplib
+from .settings import EMAIL_HOST_PASSWORD
+# Function to home page
 def home(request):
-    r_pg = recommended.objects.all()
+    r_pg = recommended.objects.all() # Recommended pgs from database shown on home page
     testmotional = Testmotional.objects.all()
     # range is to print stars on the card of pg
     return render(request,'mypg/home.html',{'pgs':r_pg,'range':range(1,6),'len':len(r_pg),'testmotionals':testmotional,'len2':len(testmotional)})
 
+# Login the user function
 def login_user(request):
     if(request.method=="POST"):
         name = request.POST['login_name']
@@ -35,6 +40,7 @@ def login_user(request):
             return redirect('home')
     return render(request,'mypg/login_signup.html')
 
+# Funtion to Signup User
 def signup_user(request):
     if(request.method=='POST'):
         name = request.POST["signup_name"]
@@ -56,27 +62,44 @@ def signup_user(request):
                 return redirect('home')
             user = User.objects.create_user(username=user_name,password=password,email=email,first_name = name)
             user.save()
+            # Sending Welcome Email to user
+            msg = EmailMessage()
+            msg['Subject'] = 'Welcome to the Apna Thikana'
+            msg['From'] = EMAIL_HOST_USER
+            msg['To'] = email
+            content = render_to_string('pg/welcome.txt',{'name':name})
+            msg.set_content(content,subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
+                smtp.send_message(msg)
+            # Success mesaage  on home page
             messages.success(request,"Account created successfully")
             return redirect('home')
     return HttpResponse("404 Error")
 
+# Function to logout the user
 def logout_user(request):
     logout(request)
     messages.success(request,"Logout Successfully")
     return redirect('home')
 
+# Funtction to about page
 def about(request):
     return render(request,'mypg/about_us.html')
 
+# Function to faq page
 def faq(request):
     return render(request,'mypg/faq.html')
 
+# Function to policy page
 def policy(request):
     return render(request,'mypg/privacy_policy.html')
 
+# Funtion to conditions page
 def conditions(request):
     return render(request,'mypg/terms_conditions.html')
 
+# Function to reset the password and send mail 
 def password_reset_request(request):
 	if request.method == "POST":
 		password_reset_form = PasswordResetForm(request.POST)

@@ -144,3 +144,6 @@ MESSAGE_TAGS = {
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # Activate Django-Heroku.
+
+# user = 'a'
+# pass ='1111'
