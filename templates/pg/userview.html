@@ -104,18 +104,83 @@ box-shadow: 5px 10px 7px rgb(119, 116, 116);
     </div>
 
 </div>
-<div class="container my-4">
+<div class="container my-4 " style="color: rgb(64, 124, 64)">
     <hr>
-    <h2 class="subheadings my-3">Pending Orders:</h2>
+    <h2 class="subheadings my-3">Confirm Orders:</h2>
+
     <!-- if no order then show empty message -->
-    {% if pending_len == 0 %}
-    <div class="text-center" style="color: rgb(245, 92, 92);">
-        <h2><i class="fa fa-shopping-cart fa-2x"></i> ! You doesn't have any orders yet.</h2>
-        <a class="btn btn-primary my-2" href="{% url 'quicksearch' 'for-boys-girls' %}">Book Pg Now</a>
+    {% if confirm_len == 0 %}
+    <div class="text-center mb-5 ">
+        <h2><i class="fa fa-bookmark "></i> ! You doesn't have any confirmed orders yet !</h2>
 
     </div>
+    {% else %}
+    <div class="row">
+        {% for order in confirmed_orders %}
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 my-3">
+            <a href="{% url 'receipt' order.sno %}" class="pg-card">
+                <div class="card box" style="width: 95%">
+                    <div class="p-1">
+                        <img src="{{order.pg.thumbnail.url}}" class="card-img-top" alt="..." height="180px">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title ">{{order.pg.name}}</h4>
+                        <h6 class="card-subtitle mb-2 text-muted"><i class="fa fa-map-marker"></i> {{pg.location}}
+                        </h6>
+
+                        <!-- Printing the stars -->
+                        {% for i in range %}
+                        {% if i <= order.pg.ratings %} <i style="color: orange;" class="fa fa-star"></i>
+                            {% else %}
+                            <i class="fa fa-star-o"></i>
+                            {% endif %}
+                            {% endfor %}
+
+                            <span class="badge bg-success mx-2"><i class="fa fa-check"></i> Verified</span>
+
+
+                            {% if order.pg.type_pg == "Both" %}
+                            <span class="badge bg-danger"><i class="fa fa-users"></i> boys/girls</span>
+                            {% elif order.pg.type_pg == "Boys" %}
+                            <span class="badge bg-danger"><i class="fa fa-male"></i> boys</span>
+                            {% else %}
+                            <span class="badge bg-danger"><i class="fa fa-female"></i> girls</span>
+                            {% endif %}
+
+                            <hr>
+                            <h4 style="float: left;"><i class="fa fa-rupee"></i> {{order.pg.price}}/mo</h4>
+
+                            <!-- Booking button only for login user -->
+                            {% if user.is_authenticated %}
+
+                            <a href="{% url 'pgdetail' order.pg.sno %}" style="float: right;"
+                                class="btn btn-success "><i class="fa fa-check "></i> Order Confirmed</a>
+                           
+                    
+                            {% endif %}
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        {%endfor%}
+    </div>
+    {% endif %}
+    <!-- else show Confirm orders -->
+
+
+
+</div>
+<div class="container my-4">
+    
+    <!-- if no order then show empty message -->
+    {% if pending_len == 0 %}
+    
     <!-- else show pending orders -->
     {% else %}
+    <hr>
+    <h2 class="subheadings my-3">Failed Orders:</h2>
     <div class="row">
         {% for order in pending_orders %}
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 my-3">
@@ -156,12 +221,7 @@ box-shadow: 5px 10px 7px rgb(119, 116, 116);
                             {% if user.is_authenticated %}
 
                             <a href="{% url 'pgdetail' order.pg.sno %}" style="float: right;"
-                                class="btn btn-warning "><i class="fa fa-spinner "></i> Order Pending</a>
-                              
-                             
-                            <button onclick="confirm_action({{order.sno}})"  
-                                class="btn btn-danger my-1 " style="float: right;"><i class="fa fa-times "></i> Cancel Order</button>
-                                
+                                class="btn btn-danger "><i class="fa fa-exclamation-triangle "></i> Order Failed</a>
                             {% endif %}
 
                     </div>
@@ -177,87 +237,7 @@ box-shadow: 5px 10px 7px rgb(119, 116, 116);
 
 </div>
 
-<div class="container my-4 " style="color: rgb(64, 124, 64)">
-    <hr>
-    <h2 class="subheadings my-3">Confirm Orders:</h2>
 
-    <!-- if no order then show empty message -->
-    {% if confirm_len == 0 %}
-    <div class="text-center mb-5 ">
-        <h2><i class="fa fa-bookmark "></i> ! You doesn't have any confirmed orders yet !</h2>
-
-    </div>
-    {% else %}
-    <div class="row">
-        {% for order in confirmed_orders %}
-        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 my-3">
-            <a href="{% url 'pgdetail' order.pg.sno %}" class="pg-card">
-                <div class="card box" style="width: 95%">
-                    <div class="p-1">
-                        <img src="{{order.pg.thumbnail.url}}" class="card-img-top" alt="..." height="180px">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title ">{{order.pg.name}}</h4>
-                        <h6 class="card-subtitle mb-2 text-muted"><i class="fa fa-map-marker"></i> {{pg.location}}
-                        </h6>
-
-                        <!-- Printing the stars -->
-                        {% for i in range %}
-                        {% if i <= order.pg.ratings %} <i style="color: orange;" class="fa fa-star"></i>
-                            {% else %}
-                            <i class="fa fa-star-o"></i>
-                            {% endif %}
-                            {% endfor %}
-
-                            <span class="badge bg-success mx-2"><i class="fa fa-check"></i> Verified</span>
-
-
-                            {% if order.pg.type_pg == "Both" %}
-                            <span class="badge bg-danger"><i class="fa fa-users"></i> boys/girls</span>
-                            {% elif order.pg.type_pg == "Boys" %}
-                            <span class="badge bg-danger"><i class="fa fa-male"></i> boys</span>
-                            {% else %}
-                            <span class="badge bg-danger"><i class="fa fa-female"></i> girls</span>
-                            {% endif %}
-
-                            <hr>
-                            <h4 style="float: left;"><i class="fa fa-rupee"></i> {{order.pg.price}}/mo</h4>
-
-                            <!-- Booking button only for login user -->
-                            {% if user.is_authenticated %}
-
-                            <a href="{% url 'pgdetail' order.pg.sno %}" style="float: right;"
-                                class="btn btn-success "><i class="fa fa-check "></i> Order Confirmed</a>
-                            {% endif %}
-
-                    </div>
-                </div>
-            </a>
-
-        </div>
-        {%endfor%}
-    </div>
-    {% endif %}
-    <!-- else show Confirm orders -->
-
-
-<script>
-    function confirm_action(p1)
-    // Funtion to confirm cancellation of order
-    {
-        var txt;
-        var r = confirm("After deleting the order you can't able to undo the action. Do you want to delete the order ?");
-    if (r == true) {
-        
-        window.location.href = "http://127.0.0.1:8000/pg/cancelorder/"+p1;
-        } 
-    else {
-        txt = "You pressed Cancel!";
-        }
-    }
-</script>
-
-</div>
 {% block js %}
 
 {% endblock js %}

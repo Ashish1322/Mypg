@@ -1,0 +1,41 @@
+{% extends 'mypg/basic.html' %}
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block body %}
+{% load static %}
+<div class="container d-flex justify-content-center">
+  <img src="{% static 'other/load.svg' %}" alt="" width="40%" height="40%">
+</div>
+<div class="container d-flex justify-content-center " style="padding: 20px;">
+    <div class="spinner-grow text-primary mx-1" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    
+    <div class="spinner-grow text-primary mx-1" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-primary mx-1" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-primary mx-1" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-primary mx-1" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-primary mx-1" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    
+</div>
+<div class="container">
+    <h3 class="subheadings" style="text-align: center;">Please wait while we are processing your payment...</h3>
+    <h4 class="smallpara" style="text-align: center;">Be patient, don't go back</h4>
+</div>
+<a id="he" href="{% url 'loading' sno %}" style="display: none;"></a>
+<br><br><br><br><br>
+<script>
+
+
+document.getElementById('he').click()
+</script>
+{% endblock body %}

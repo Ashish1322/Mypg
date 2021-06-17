@@ -17,6 +17,7 @@ Including another URLconf
 from django.urls import path,include
 from . import views
 urlpatterns = [   
+     
      path('contact/', views.contact,name="contact"),
      path('findpg/', views.findpg,name="findpg"),
      path('pgdetial/<int:slug>/', views.pgdetail,name="pgdetail"),
@@ -29,4 +30,9 @@ urlpatterns = [
      path('registerpg/', views.registerpg,name="registerpg"),
      path('testmotional',views.testm,name="testmotional"),
      path('cancelorder/<int:sno>',views.cancel,name="cancel"),
+     path('payment-success',views.payment_success,name="payment_success"),
+     path('receipt/<int:sno>',views.receipt,name="receipt"),
+     path('wait/<int:sno>',views.show_load,name="loading"),
+     
+     
 ]

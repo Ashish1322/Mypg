@@ -141,7 +141,7 @@ form.sign-in-form {
 }
 
 .btn {
-  width: 150px;
+  width: 200px;
   background-color: #5995fd;
   border: none;
   outline: none;
@@ -414,7 +414,7 @@ form.sign-in-form {
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="{% url 'login' %}" method="POST" class="sign-in-form">
+          <form action="{% url 'login' %}" onsubmit="acitvate_spin()" method="POST" class="sign-in-form">
             {% csrf_token %}
             <h2 class="title " >Sign in</h2>
             <div class="input-field">
@@ -425,13 +425,14 @@ form.sign-in-form {
               <i class="fas fa-lock"></i>
               <input name="login_password" type="password" placeholder="Password" />
             </div>
-            
+            <div id="lgin">
             <input type="submit" value="Login" class="btn solid" />
+          </div>
             <div><a href="{% url 'password_reset' %}" style="text-decoration: none;">Forget Password ?</a> </div>
       
           </form>
           <!-- Sign up form -->
-          <form action="{% url 'signup' %}" method="POST" class="sign-up-form">
+          <form action="{% url 'signup' %}" onsubmit="activate_spinner()" method="POST" class="sign-up-form">
             {% csrf_token %}
             <h2 class="title">Sign up</h2>
             <div class="input-field">
@@ -456,8 +457,9 @@ form.sign-in-form {
               <i class="fas fa-lock"></i>
               <input name="signup_password_confirm" type="password" placeholder="Confirm Password" required/>
             </div>
-            
-            <input type="submit" class="btn" value="Sign up" />
+            <div id="sign_up_but">
+            <input type="submit"  class="btn"  value="Sign up" />
+          </div>
      
          
           </form>
@@ -506,6 +508,15 @@ sign_up_btn.addEventListener("click", () => {
 sign_in_btn.addEventListener("click", () => {
   container.classList.remove("sign-up-mode");
 });
+function activate_spinner()
+{
+  document.getElementById("sign_up_but").innerHTML = "<button  class='btn btn-primary'><span class='spinner-border spinner-border-sm'></span> Please Wait...</button>";
 
+}
+function acitvate_spin()
+{
+  document.getElementById("lgin").innerHTML = "<button  class='btn btn-primary'><span class='spinner-border spinner-border-sm'></span> Please Wait...</button>";
+
+}
     </script>
 {% endblock body %}

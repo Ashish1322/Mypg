@@ -57,7 +57,7 @@
     <div class="col-md-7 col-lg-8">
       <h3>Booking Form</h3>
       <div class="form-text" style="font-size: 18px;">Don't Worry all your details are kept secret.</div>
-      <form class=" my-3" action="{% url 'bookpg' pg.sno %}" method="POST">
+      <form class=" my-3" onsubmit="acitvate_spin()" action="{% url 'bookpg' pg.sno %}" method="POST">
       {% csrf_token %}
         <div class="row g-3">
           <div class="col-sm-6">
@@ -153,8 +153,9 @@
           <div class="form-text">Please read Terms and conditions carefully before Accepting. </div>
         </div>
         <p class="text-center">After Filling form You will receive a phone call for Confirmation of booking.</p>
-        <button class="w-100 btn btn-primary btn-lg my-3" type="submit">Confirm Boking</button>
-
+        <div id="pay">
+        <input class="w-100 btn btn-primary btn-lg my-3" type="submit" value="Confirm and Pay">
+      </div>
 
       </form>
     </div>
@@ -166,5 +167,11 @@
   <h3 style="font-size: 30px">Please Login to book PG</h3>
 </div>
 {% endif %}
+<script>
+  function acitvate_spin()
+{
+  document.getElementById("pay").innerHTML = "<button  class='w-100 btn btn-primary btn-lg my-3'><span class='spinner-border spinner-border-sm'></span> Please Wait...</button>";
 
+}
+</script>
 {% endblock body %}

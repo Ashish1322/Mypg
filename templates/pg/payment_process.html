@@ -1,0 +1,53 @@
+{% extends 'mypg/basic.html' %}
+{% block title %}contact us{% endblock title %}
+
+{% block body %}
+
+<div class="container" id="main">
+    {% load static %}
+    <h1 class="headings" style="text-align: center;"></i>We have created a request for your order to the owner of Pg</h1>
+    <h3 class="my-3 subheadings" style="text-align: center ; font-size: 35px; color: rgba(255, 0, 0, 0.493);"><i class="fa fa-exclamation-circle"></i>  Make Payment to Confirm your Order.</h3>
+    <div class="container d-flex justify-content-center">
+    <img src={% static 'other/payment.svg' %} alt="" height="40%" width="40%" class="p-2">
+</div>
+    <h3 class="my-3 subheadings" style="text-align: center ; font-size: 35px;"></h3>
+
+    <pre class="my-3 subheadings" style="text-align: center ; font-size: 29px;">Amount to be Paid:    <i class="fa fa-rupee"></i> {{amount_rupee}}</pre>
+    <p class="subpara" style="text-align: center;"><b>Note: </b> If you go back from this page then this order will be failed! </p>
+    
+</div>
+
+<div class="container d-flex justify-content-center">
+    
+<form action="{% url 'payment_success' %}" method="POST">
+<script
+    src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_xxnGiAzsbNO0b9"
+    data-amount={{amount}}
+    data-currency="INR"
+    data-order_id={{order_id}}
+    data-buttontext="Pay Now"
+    data-name="Apna Thikana"
+    data-description="{{name_pg}}"
+    data-image="https://example.com/your_logo.jpg"
+    data-prefill.name={{name}}
+    data-prefill.email={{email}}
+    data-theme.color="#F37254"
+></script>
+<input type="hidden" custom="Hidden Element" name="hidden">
+<!-- This input tag is to send the order_id also with the 3 parameters returned by reazorpay when the payment is done by user and we are using this order id as a key to find the order in database to store the 3 parameters returned by razopay in database of that corrsponding order and it will be done in payment success view function -->
+<input type="hidden" name="order_id" value="{{order_id}}" > 
+<input type="hidden" name="email" value="{{email}}" > 
+</form>
+</div>
+
+<script>
+    // Changing the default razopray button style
+    function change_button()
+    {
+      document.getElementsByClassName("razorpay-payment-button")[0].className = "btn btn-primary btn-lg"
+    }
+    // show loading when the form is submitted so that mail can sent
+    change_button();
+</script>
+{% endblock body %}

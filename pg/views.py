@@ -1,10 +1,19 @@
 # Importing some packages which are required
+from mypg.settings import EMAIL_HOST_PASSWORD
 from django.shortcuts import render,HttpResponse,redirect
 from django.contrib import messages
 from .models import Contact,Pg,Images,Booking,RegisterPg,Testmotional
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.core.paginator import Paginator
+from django.views.decorators.csrf import csrf_exempt
+from mypg.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail, BadHeaderError
+import razorpay
+from django.template.loader import render_to_string
+import smtplib
+from email.message import EmailMessage
+import datetime
 
 # Function to store testmotional to database
 def testm(request):
@@ -128,32 +137,124 @@ def book_pg(request,slug):
         zip_code = request.POST['zip']
         college = request.POST['college_name']
         username = request.POST['user']
-        # Finding Pg
+        # Finding Pg and user
         pg = Pg.objects.get(sno=slug)
         user = User.objects.get(username=username)
+
+
         # Checking if the user has already booked 2 pgs because more than 2 pgs are not booked at same account
-        no_of_pending = Booking.objects.filter(user=user,order_confirmed=0)
-        if(len(no_of_pending)>=2):
-            messages.error(request,"Booking Failed because you cannot have more then 2 pending orders, So please try later !")
-            return redirect('home')
-        elif (len(str(phonenumber))!=10):
-            messages.error(request,'Invalid Phone number!')
-            return redirect('home')
+        # no_of_pending = Booking.objects.filter(user=user,order_confirmed=0)
+        # if(len(no_of_pending)>=2):
+        #     messages.error(request,"Booking Failed because you cannot have more then 2 pending orders, So please try later !")
+        #     return redirect('home')
+        # elif (len(str(phonenumber))!=10):
+        #     messages.error(request,'Invalid Phone number!')
+        #     return redirect('home')
+
         
-        order = Booking(first_name=first_name,last_name=last_name,email=email,address=address,phone_number=phonenumber,state=state,zip_code=zip_code,college=college,pg=pg,user=user,order_confirmed=0)
+        # Creating order from server side to Razorpay
+        client = razorpay.Client(auth = ('rzp_test_xxnGiAzsbNO0b9', '1TO0c2GUr4dscLuVSNaC65Ja'))
+        order_amount = pg.price*100 #Price is in paisas to multiply by 100
+        order_currency = 'INR'
+        notes = {'first_name':first_name,'last_name':last_name,'email':email,'address':address,'phonenumber':phonenumber,'state':state,'username':username}
+    
+        order = client.order.create({'amount':order_amount, 'currency':order_currency,'notes':notes})
+    
+        # initially the status of this order in databae is pending
+        order_ds = Booking(first_name=first_name,last_name=last_name,email=email,address=address,phone_number=phonenumber,state=state,zip_code=zip_code,college=college,pg=pg,user=user,order_id = order['id'])
+        order_ds.save()      
+        
+        return render(request,'pg/payment_process.html',{'order_id':order['id'],'amount':order_amount,'amount_rupee': order_amount/100,'name':first_name+last_name,'email':email,'name_pg':pg.name})
+        
+    return HttpResponse("404 Error") #if someone try to manually put url then show error
+
+
+
+
+# if we send email in payment success function below then it will take time and no laoding will show due to some defualt settings of razorpay form so after the saving and confirming order we are sending the request to this fuction and while showing loading animation we can send email using this function and it will look more geniune to user that loading is happening if we don't do this then the impacct will be bad
+def show_load(request,sno):
+    order = Booking.objects.get(sno=sno)
+    # getting all the data of confirmed order and sending mail receipt to user
+    c = {'pgname':order.pg.name,'pglocation':order.pg.location,'pgtype': order.pg.type_pg,'price':order.pg.price ,'paymentid':order.razorpay_payment_id,'phonenumber':order.phone_number,'email':order.email,'name':order.first_name+ order.last_name,'zip':order.zip_code,'state':order.state,'paymentmethod':'UPI','orderid':order.order_id,'pymentdate':order.booking_date,'validdate':order.expiry_date}
+    filepos = "pg/paymentdone.txt"
+    msg = EmailMessage()
+    msg['Subject'] = 'Payment Receipt for your Booking'
+    msg['From'] = EMAIL_HOST_USER 
+    msg['To'] = order.email
+    msg.set_content(render_to_string(filepos,c), subtype='html')
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
+        smtp.send_message(msg)
+        # When mail is send show succesfull message and redirect to receipt
+        messages.success(request,"Congratulations your payment is Successfull. Payment receipt has been sent on given email.")
+        return render(request,'pg/receipt.html',c)   
+    
+# Razorpay will send a post request to this view function when a user will make payment and  return all the details of payment and status of payment using post request to us but in django it is not allowed that some other websites will make post request on our website due to csrf protection so here we are removing csrf protection for this view function so that it will accept the post requests made by other websites
+@csrf_exempt
+def payment_success(request):
+    if(request.method=="POST"):
+        # Fetching details returned by the checkout form of razorpay
+        razorpay_payment_id = request.POST['razorpay_payment_id']
+        razorpay_order_id = request.POST['razorpay_order_id']
+        razorpay_signature = request.POST['razorpay_signature']
+        order_id = request.POST['order_id']
+        email = request.POST['email']
+        # Store this details in a order database
+        order = Booking.objects.get(order_id=order_id)
+        order.razorpay_payment_id = razorpay_payment_id
+        order.razorpay_order_id = razorpay_order_id
+        order.razorpay_signature = razorpay_signature
         order.save()
-        messages.success(request,"Thank for ordering we will contact you shortly for confirmation of order")
-        return redirect('home')
+        # login the client
+        client = razorpay.Client(auth = ('rzp_test_xxnGiAzsbNO0b9', '1TO0c2GUr4dscLuVSNaC65Ja'))
+        # store all the variables in a dictionary
+        params_dict = {'razorpay_order_id':razorpay_order_id ,'razorpay_payment_id': razorpay_payment_id,'razorpay_signature': razorpay_signature}
+        # Verify the signature returned by the razorpay and know payment is successfull or not
+        #by using verify_payment_signature function which return None when signature matches and if there is any problem or signature not mathces then it willl raise the error which we are handling in the except block and if it is successfull then it will remain in try block and if not successfull then it will go on except block 
+        try:
+            # if payment is successfull then  update the status of order in database which is fetch by using order_id above to the Success
+
+            client.utility.verify_payment_signature(params_dict)
+            order.order_status = "confirmed"
+            order.save()
+
+            # Getting Dates of booking and expiry of booking
+            x = datetime.datetime.now()
+            validtill = x+datetime.timedelta(36)
+            booking_date = x.strftime("%d %b %Y, %H:%M:%S")
+            validtill = validtill.strftime("%d %b %Y, %H:%M:%S")
+            order.booking_date = booking_date
+            order.expiry_date = validtill
+            order.save()
+
+            # At this step payment is successfull and order is confirmed so show the loading html file for loading animation and while this animation send email to user using show_load function and show order successfull message.
+            return render(request,'pg/shoload.html',{'sno':order.sno})
+            
+
+        except Exception as e:
+            # if payment is failed then  update the status of order in database which is fetch by using order_id above to the Failure
+            order.order_status = "failed"
+            order.save()
+            messages.error(request,"Payment Failed, Something went wrong please try again")
+            return redirect("home") #if payment is failed redirect to home
+
+       
         
     return HttpResponse("404 Error")
+
 
 # To show user view of any user
 def userview(request,slug):
     # slug is the username of the current user
     user = User.objects.get(username=slug)
     if(user.is_authenticated): # if user is login then show all the things
-        pending_orders = Booking.objects.filter(user=user,order_confirmed=0)
-        confirmed_orders = Booking.objects.filter(user=user,order_confirmed=1)
+
+        # Getting orders which are not successfull
+        p1 = Booking.objects.filter(user=user,order_status='pending')
+        p2 = Booking.objects.filter(user=user,order_status='failed')
+        pending_orders = p1.union(p2)
+        # Getting orders which are confirmed and successfull
+        confirmed_orders = Booking.objects.filter(user=user,order_status='confirmed')
         # For identyfying in the html file that pending order or confirmed are empty
         pending_len = len(pending_orders)
         confirm_len = len(confirmed_orders)
@@ -240,3 +341,34 @@ def cancel(request,sno):
     except Exception as e:
         messages.error(request,"Some error Occured Please try agian.")
         return redirect('home')
+
+def receipt(request,sno):
+    try:
+        order = Booking.objects.get(sno=sno)
+        x = datetime.datetime.now()
+        validtill = x+datetime.timedelta(36)
+        booking_date = x.strftime("%d %b %Y, %H:%M:%S")
+        validtill = validtill.strftime("%d %b %Y, %H:%M:%S")
+
+            # Filling the empty feilds and detalis in the payment reciept that has to be send to user
+        c = {'pgname':order.pg.name,'pglocation':order.pg.location,'pgtype': order.pg.type_pg,'price':order.pg.price ,'paymentid':order.razorpay_payment_id,'phonenumber':order.phone_number,'email':order.email,'name':order.first_name+ order.last_name,'zip':order.zip_code,'state':order.state,'paymentmethod':'UPI','orderid':order.order_id,'pymentdate':order.booking_date,'validdate':order.expiry_date}  
+        content = render_to_string('pg/paymentdone.txt',c)
+
+        return render(request,'pg/receipt.html',c)     
+    except Exception as e:
+        messages.error("Something Went Wrong Please Try again later")
+        return redirect('home')
+
+# https://towardsdatascience.com/how-to-send-beautiful-emails-with-python-the-essential-guide-a01d00c80cd0
+def sem(request):
+    msg = EmailMessage()
+    msg['Subject'] = 'This is my first Python email'
+    msg['From'] = EMAIL_HOST_USER 
+    msg['To'] = 'a.m2001nov@gmail.com' 
+    pg = Pg.objects.get(sno=6)
+    
+    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+        smtp.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
+        smtp.send_message(msg)
+    return HttpResponse("Success")
+   

@@ -144,7 +144,7 @@ active
     </div>
     <div class="col-xl-6 col-sm-12  col-md-last col-12">
 
-      <form action="{% url 'contact' %}" method="POST" class="sign-up-form">
+      <form action="{% url 'contact' %}" method="POST" class="sign-up-form" >
         {% csrf_token %}
 
         <div class="input-field">
@@ -177,4 +177,5 @@ active
 <div class="container" style="height: 50px;">
 
 </div>
+
 {% endblock body %}

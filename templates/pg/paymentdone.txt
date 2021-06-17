@@ -1,0 +1,517 @@
+{% autoescape off %}
+<html lang="en">
+
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <title>Payment Receipt</title>
+   </head>
+
+   <body>
+      <div style="background-color:#fafafa">
+         <div style="background-color:#fafafa">
+            <div style="background:rgb(35,113,236);background-color:rgb(35,113,236);Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation"
+                  style="background:rgb(35,113,236);background-color:rgb(35,113,236);width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="vertical-align:top;padding:0px">
+                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                             width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left"
+                                                      style="font-size:0px;padding:0px;word-break:break-word">
+                                                      <div
+                                                         style="font-family:Trebuchet MS;font-size:13px;line-height:1;text-align:left;color:#000000">
+                                                         <div style="box-sizing:border-box;max-width:100%">
+                                                            <div
+                                                               style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;padding-top:18px;padding-bottom:18px">
+                                                               <div
+                                                                  style="text-align:center;width:fit-content;margin:0 auto;font-size:16px;line-height:1.5;color:#0d2366">
+                                                                  <div
+                                                                     style="display:inline-block;vertical-align:middle;background-color:#ffffff;box-sizing:border-box;line-height:0">
+                                                                  </div>
+                                                                  <div
+                                                                     style="display:inline-block;vertical-align:middle;margin-left:10px;color:#ffffff;font-size: 27px; font-weight: 900;">
+                                                                     Apna Thikana
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;background-color:#ffffff;padding-top:12px;border-bottom-left-radius:0;border-bottom-right-radius:0">
+                                                               <div
+                                                                  style="text-align:center;width:fit-content;margin:0 auto">
+                                                                  <div
+                                                                     style="box-sizing:border-box;display:inline-block;max-width:100%">
+                                                                     <span
+                                                                        style="font-size:24px;line-height:1.5;color:#0d2366"> &#x20b9;</span><span
+                                                                        style="font-size:24px;line-height:1.5;color:#0d2366">{{price}}</span><span
+                                                                        style="font-size:16px;line-height:1.5;color:#515978">.00</span>
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div style="Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="vertical-align:top;padding:0px">
+                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                             width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left"
+                                                      style="font-size:0px;padding:0px;word-break:break-word">
+                                                      <div
+                                                         style="font-family:Trebuchet MS;font-size:13px;line-height:1;text-align:left;color:#000000">
+                                                         <div
+                                                            style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;background-color:#ffffff;padding-bottom:16px;border-top-left-radius:0;border-top-right-radius:0">
+                                                            <div style="text-align:center">
+                                                               <div
+                                                                  style="margin:0;font-size:16px;line-height:1.5;color:#7b8199">
+                                                                  <div
+                                                                     style="width:45px;height:30px;display:inline-block;vertical-align:middle">
+                                                                     <img
+                                                                        src="https://ci5.googleusercontent.com/proxy/obryrFJ5wPMltJJT4UrcnQSLjKbLLwiv0rJaLxMxnCjEQAz6k7TgKZ1bXQpyWmpLiByNBQl5YVVdOjvomApwsAzEgb_VVR5L-GHelhWsKLsRbW0=s0-d-e1-ft#https://cdn.razorpay.com/static/assets/email/payment_success.png"
+                                                                        style="height:100%;width:100%" class="CToWUd">
+                                                                  </div>
+                                                                  <div style="display:inline-block">
+                                                                     &nbsp;Paid Successfully
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div style="Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="vertical-align:top;padding:0px">
+                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                             width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left"
+                                                      style="font-size:0px;padding:0px;word-break:break-word">
+                                                      <div
+                                                         style="font-family:Trebuchet MS;font-size:13px;line-height:1;text-align:left;color:#000000">
+                                                         <div
+                                                            style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;background-color:#ffffff;border-top-width:2px;border-top-style:solid;padding-top:20px;padding-bottom:20px;border-top-color:rgb(35,113,236);margin-top:8px">
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Payment Id
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{paymentid}}
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Booking Date
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{pymentdate}}
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Valid Till
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{validdate}}
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Order id
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  <div>{{orderid}}</div>
+                                                                  
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Mobile Number
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{phonenumber}}
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div style="Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="vertical-align:top;padding:0px">
+                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                             width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left"
+                                                      style="font-size:0px;padding:0px;word-break:break-word">
+                                                      <div
+                                                         style="font-family:Trebuchet MS;font-size:13px;line-height:1;text-align:left;color:#000000">
+                                                         <div
+                                                            style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;background-color:#ffffff;padding-top:20px;padding-bottom:20px;margin-top:8px">
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Email
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  <a href="mailto:a.m2002nov@gmail.com"
+                                                                     target="_blank">{{email}}</a>
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Phone
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{phonenumber}}
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Name
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{name}}
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Pincode
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{zip}}
+                                                               </div>
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  State
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{state}}
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div style="Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="vertical-align:top;padding:0px">
+                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                             width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left"
+                                                      style="font-size:0px;padding:0px;word-break:break-word">
+                                                      <div
+                                                         style="font-family:Trebuchet MS;font-size:13px;line-height:1;text-align:left;color:#000000">
+                                                         <div
+                                                            style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;background-color:#ffffff;padding-top:20px;padding-bottom:20px;margin-top:8px">
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Pg Name
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{pgname}}</a>
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Pg Location
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{pglocation}}
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+                                                               <div
+                                                                  style="color:#7b8199;display:inline-block;vertical-align:top;width:50%;width:calc((388.203px - 100%)*388.203);max-width:100%;min-width:50%">
+                                                                  Pg Type
+                                                               </div>
+                                                               <div
+                                                                  style="color:#515978;display:inline-block;max-width:50%">
+                                                                  {{pgtype}}
+                                                               </div>
+                                                            </div>
+                                                            <div
+                                                               style="font-size:14px;line-height:1.5;width:100%;box-sizing:border-box;padding-left:9.3%;margin-bottom:20px">
+
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div style="Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="vertical-align:top;padding:0px">
+                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                             width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left"
+                                                      style="font-size:0px;padding:0px;word-break:break-word">
+                                                      <div
+                                                         style="font-family:Trebuchet MS;font-size:13px;line-height:1;text-align:left;color:#000000">
+                                                         <div
+                                                            style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;background-color:#ffffff;padding-top:20px;padding-bottom:20px;margin-top:8px">
+                                                            <div
+                                                               style="text-align:center;color:#515978;font-size:14px;line-height:1.5">
+                                                               Thanks for Using Apna Thikana.
+                                                            </div>
+                                                            <div
+                                                               style="text-align:center;color:#515978;font-size:14px;line-height:1.5">
+                                                               For any product or service related
+                                                               queries, please contact <a
+                                                                  href="http://ashu.pythonanywhere.com/pg/contact/"
+                                                                  target="_blank">Apna Thikana</a>
+                                                               support.
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+
+            <div style="Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+            <div style="Margin:0px auto;max-width:unset">
+               <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="width:100%">
+                  <tbody>
+                     <tr>
+                        <td style="direction:ltr;font-size:0px;padding:0px;text-align:center;vertical-align:top">
+                           <div class="m_2928947657849287418mj-column-per-100"
+                              style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%">
+                              <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%">
+                                 <tbody>
+                                    <tr>
+                                       <td style="vertical-align:top;padding:0px">
+                                          <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                             width="100%">
+                                             <tbody>
+                                                <tr>
+                                                   <td align="left"
+                                                      style="font-size:0px;padding:0px;word-break:break-word">
+                                                      <div
+                                                         style="font-family:Trebuchet MS;font-size:13px;line-height:1;text-align:left;color:#000000">
+                                                         <div style="box-sizing:border-box;max-width:100%">
+                                                            <div
+                                                               style="width:85%;width:calc(46000% - 211600px);max-width:460px;min-width:308px;margin-left:auto;margin-right:auto;box-sizing:border-box;padding-left:16px;padding-right:16px;border-radius:2px;padding-top:12px;padding-bottom:12px">
+                                                               <div
+                                                                  style="text-align:center;width:fit-content;margin:0 auto;font-size:12px;line-height:1.5;color:#8d92a4">
+                                                                  <div
+                                                                     style="display:inline-block;vertical-align:middle">
+                                                                     Powered by
+                                                                  </div>
+                                                                  <div
+                                                                     style="display:inline-block;vertical-align:middle;height:18px;width:85px;margin-left:5px">
+                                                                     <img
+                                                                        src="https://ci5.googleusercontent.com/proxy/3leprtwWL39M-NpPZsMyhaDIzRpYIsO8D8SaciYPFmxYQ3_2X0qXs75fcwqFesPk-A_RZw=s0-d-e1-ft#https://cdn.razorpay.com/logo.png"
+                                                                        style="height:100%;width:100%" class="CToWUd">
+                                                                  </div>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </div>
+                                                   </td>
+                                                </tr>
+                                             </tbody>
+                                          </table>
+                                       </td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+         <img alt=""
+            src="https://ci4.googleusercontent.com/proxy/h8SA7ak41jmi5fiUYqZYdE3l9ciPEPp2XFSjS9zyyZI0WiW_hXbxJGxDEW3v8-9gn4JAtg5XoTpmf3iR4IBn4lIPILjJ5jVcxCNRFfwFC4Zuhv1w5ljIpMVpsN2ROcFeFid7tues7aiOQ173Yeve2mF3Z_h1KWxXjsN2IA1o20yRTxEiN8kUZYTVrNmo12Okexy4YeUttcSZuw=s0-d-e1-ft#http://496gf0lz.r.ap-south-1.awstrack.me/I0/0109017a041cc525-0533480c-e4e3-4db1-968d-e88dc8db3642-000000/CBcMCGDeohzfRip6H4iK98_erKA=2"
+            style="display:none;width:1px;height:1px" class="CToWUd">
+         <div class="yj6qo"></div>
+         <div class="adL">
+         </div>
+      </div>
+
+   </body>
+
+</html>
+
+
+
+{% endautoescape %}

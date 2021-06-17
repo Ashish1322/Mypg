@@ -58,6 +58,13 @@ class Images(models.Model):
     
 # Function to Store Bookings of the pgs
 class Booking(models.Model):
+    
+    # Order Status
+    type_choices = (
+        ("confirmed","Confirmed"),
+        ("pending","Pending"),
+        ("failed","Failed"),
+    )
     sno = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=40,default=" ")
     last_name = models.CharField(max_length=40,default=" ")
@@ -67,8 +74,18 @@ class Booking(models.Model):
     state = models.CharField(max_length=40,default=' ')
     zip_code = models.IntegerField()
     college = models.CharField(max_length=200,default=" ")
-    order_confirmed = models.BooleanField()
+    order_status = models.CharField(max_length=30,choices=type_choices,default='pending')
     user = models.ForeignKey(User,on_delete=models.CASCADE) # To store order corrspond to which user
+    booking_date = models.CharField(max_length=30,default="")
+    expiry_date = models.CharField(max_length=30,default="")
+    order_id = models.CharField(max_length=150,default="") # To store order generated initially with razorpay client
+
+    # To store the Transaction details returned by the razorpay after the user has made payment
+    razorpay_payment_id = models.CharField(max_length=150,default=" ")
+    razorpay_order_id = models.CharField(max_length=150,default=" ")
+    razorpay_signature = models.CharField(max_length=450,default=" ")
+
+
     pg = models.ForeignKey(Pg,on_delete=models.CASCADE) # Which pg is booked by user
     def __str__(self):
         return self.user.username
