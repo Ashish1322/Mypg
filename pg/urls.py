@@ -20,10 +20,10 @@ urlpatterns = [
      
      path('contact/', views.contact,name="contact"),
      path('findpg/', views.findpg,name="findpg"),
-     path('pgdetial/<int:slug>/', views.pgdetail,name="pgdetail"),
+     path('pgdetial/<str:slug>/', views.pgdetail,name="pgdetail"),
      path('quicksearch/<str:slug>/', views.quicksearch,name="quicksearch"),
-     path('bookpg-form/<int:slug>/', views.book_pg_form,name="bookpgform"),
-     path('bookpg/<int:slug>/', views.book_pg,name="bookpg"),
+     path('bookpg-form/<str:slug>/', views.book_pg_form,name="bookpgform"),
+     path('bookpg/<str:slug>/', views.book_pg,name="bookpg"),
      path('userview/<str:slug>', views.userview,name="userview"),
      path('changedetails/<str:slug>', views.change_details,name="changedetails"),
      path('changepassword/<str:slug>', views.changepassword,name="changepassword"),

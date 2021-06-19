@@ -57,7 +57,7 @@
     <div class="col-md-7 col-lg-8">
       <h3>Booking Form</h3>
       <div class="form-text" style="font-size: 18px;">Don't Worry all your details are kept secret.</div>
-      <form class=" my-3" onsubmit="acitvate_spin()" action="{% url 'bookpg' pg.sno %}" method="POST">
+      <form class=" my-3" onsubmit="acitvate_spin()" action="{% url 'bookpg' pg.slug %}" method="POST">
       {% csrf_token %}
         <div class="row g-3">
           <div class="col-sm-6">

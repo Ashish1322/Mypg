@@ -164,9 +164,9 @@ font-weight: 500;
   <h5>Fast Search</h5>
   <!-- Here the 1000 refer to to the boys and 2000 refer to all pgs and 3000 refers to the girls only
   because we are sending this values in our view function so there we can recognize weather the results shown boys,girl or both. -->
-  <a href="{% url 'quicksearch' 'for-boys-only' %}" class="btn q-button"><i class="fa fa-male"></i> Boys Only</a>
-  <a href="{% url 'quicksearch' 'for-boys-girls' %}" class="btn q-button"><i class="fa fa-users"></i> All Pgs</a>
-  <a href="{% url 'quicksearch' 'for-girls-only' %}" class="btn  q-button"><i class="fa fa-female"></i> Girls only</a>
+  <a href="{% url 'quicksearch' 'pgs-for-boys-cgc-jhanjeri-landra-chandigarh' %}" class="btn q-button"><i class="fa fa-male"></i> Boys Only</a>
+  <a href="{% url 'quicksearch' 'boys-girls-pg-near-cgc-chandigarh' %}" class="btn q-button"><i class="fa fa-users"></i> All Pgs</a>
+  <a href="{% url 'quicksearch' 'pgs-for-girls-cgc-jhanjeri-landra-chandgarh' %}" class="btn  q-button"><i class="fa fa-female"></i> Girls only</a>
 
 </div>
 <!-- Available cities -->
@@ -174,8 +174,8 @@ font-weight: 500;
   <h5>Available Locations</h5>
   <!-- Here the 1000 refer to to the boys and 2000 refer to all pgs and 3000 refers to the girls only
   because we are sending this values in our view function so there we can recognize weather the results shown boys,girl or both. -->
-  <a href="{% url 'quicksearch' 'Jhanjeri' %}" class="btn q-button"><i class="fa fa-map-marker"></i> Jhanjeri, Mohali</a>
-  <a href="{% url 'quicksearch' 'Landra' %}" class="btn q-button"><i class="fa fa-map-marker"></i> Landra, Mohali</a>
+  <a href="{% url 'quicksearch' 'paying-guests-cgc-jhanjeri-mohali-chandigarh' %}" class="btn q-button"><i class="fa fa-map-marker"></i> Jhanjeri, Mohali</a>
+  <a href="{% url 'quicksearch' 'paying-guests-cgc-landra-mohali-chandigarh' %}" class="btn q-button"><i class="fa fa-map-marker"></i> Landra, Mohali</a>
   
 
 </div>
@@ -191,7 +191,7 @@ font-weight: 500;
         <div class="row">
           {% for pge in pgs %}
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-2 ">
-            <a href="{% url 'pgdetail' pge.pg.sno %}" class="pg-card">
+            <a href="{% url 'pgdetail' pge.pg.slug %}" class="pg-card">
               <div class="card box mx-auto" style="width: 80%">
                 <div class="p-1">
                   <img src="{{pge.pg.thumbnail.url}}" class="card-img-top" alt="..." height="180px">
@@ -227,10 +227,10 @@ font-weight: 500;
                     {% if user.is_authenticated %}
                     <!-- if user is login then check for availability of pg -->
                     {% if pge.pg.available == 1 %}
-                    <a href="{% url 'bookpgform' pge.pg.sno %}" style="float: right;" class="btn btn-primary ">Book
+                    <a href="{% url 'bookpgform' pge.pg.slug %}" style="float: right;" class="btn btn-primary ">Book
                       now</a>
                     {% else %}
-                    <a href="{% url 'pgdetail' pge.pg.sno %}" style="float: right;" class="btn btn-info ">Not
+                    <a href="{% url 'pgdetail' pge.pg.slug %}" style="float: right;" class="btn btn-info ">Not
                       Available</a>
                     {% endif %}
                     <!-- if user is not login -->

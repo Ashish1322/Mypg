@@ -34,7 +34,7 @@
         <div class="row">
         {% for pg in pgs %}
         <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 my-3">
-            <a href="{% url 'pgdetail' pg.sno %}" class="pg-card">
+            <a href="{% url 'pgdetail' pg.slug %}" class="pg-card">
                 <div class="card box" style="width: 95%">
                     <div class="p-1">
                         <img src="{{pg.thumbnail.url}}"
@@ -72,9 +72,9 @@
                         {% if user.is_authenticated %}
                           <!-- if user is login then check for availability of pg -->
                           {% if pg.available == 1 %}
-                            <a href="{% url 'bookpgform' pg.sno %}" style="float: right;" class="btn btn-primary ">Book now</a>
+                            <a href="{% url 'bookpgform' pg.slug %}" style="float: right;" class="btn btn-primary ">Book now</a>
                           {% else %}
-                            <a href="{% url 'pgdetail' pg.sno %}" style="float: right;"  class="btn btn-info ">Not Available</a>
+                            <a href="{% url 'pgdetail' pg.slug %}" style="float: right;"  class="btn btn-info ">Not Available</a>
                           {% endif %}
                         <!-- if user is not login -->
                         {% else %}

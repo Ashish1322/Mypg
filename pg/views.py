@@ -76,7 +76,7 @@ def findpg(request):
 
 # Function to details of any Pg and slug contains pg id which is to be shown
 def pgdetail(request,slug):
-    pg = Pg.objects.get(sno=slug)
+    pg = Pg.objects.get(slug=slug)
     distance_list = pg.distance.split(',') # for printing in html split by ,
     rules = pg.rules.split(",") # for showing rule in html spilt by ,
     images = Images.objects.filter(pg=pg) # all the image corrspond to pg
@@ -95,19 +95,19 @@ def pgdetail(request,slug):
 def quicksearch(request,slug):
     # Slug is the type of quick search
     pgs = [] # list to store results
-    if(slug=="Jhanjeri"):
+    if(slug=="paying-guests-cgc-jhanjeri-mohali-chandigarh"):
         pgs = Pg.objects.filter(location__contains = "Jhanjeri")
         
-    elif(slug=="Landra"):
+    elif(slug=="paying-guests-cgc-landra-mohali-chandigarh"):
         pgs = Pg.objects.filter(location__contains = "Landra")
 
-    elif(slug == "for-boys-only"):
+    elif(slug == "pgs-for-boys-cgc-jhanjeri-landra-chandigarh"):
         pgs = Pg.objects.filter(type_pg = "Boys")
         
-    elif(slug == "for-boys-girls"):
+    elif(slug == "boys-girls-pg-near-cgc-chandigarh"):
         pgs = Pg.objects.all()
         
-    elif(slug == "for-girls-only"):
+    elif(slug == "pgs-for-girls-cgc-jhanjeri-landra-chandgarh"):
         pgs = Pg.objects.filter(type_pg = "Girls")
         
     else:
@@ -121,7 +121,7 @@ def quicksearch(request,slug):
 
 # To show book pg form of selected pg
 def book_pg_form(request,slug):
-    pg = Pg.objects.get(sno=slug)
+    pg = Pg.objects.get(slug=slug)
     # Range is to print stars shown on selected pg
     return render(request,'pg/bookpg.html',{'pg':pg,'range':range(1,6)})
 
@@ -138,7 +138,7 @@ def book_pg(request,slug):
         college = request.POST['college_name']
         username = request.POST['user']
         # Finding Pg and user
-        pg = Pg.objects.get(sno=slug)
+        pg = Pg.objects.get(slug=slug)
         user = User.objects.get(username=username)
 
 
@@ -359,16 +359,4 @@ def receipt(request,sno):
         messages.error("Something Went Wrong Please Try again later")
         return redirect('home')
 
-# https://towardsdatascience.com/how-to-send-beautiful-emails-with-python-the-essential-guide-a01d00c80cd0
-def sem(request):
-    msg = EmailMessage()
-    msg['Subject'] = 'This is my first Python email'
-    msg['From'] = EMAIL_HOST_USER 
-    msg['To'] = 'a.m2001nov@gmail.com' 
-    pg = Pg.objects.get(sno=6)
-    
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-        smtp.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
-        smtp.send_message(msg)
-    return HttpResponse("Success")
    
