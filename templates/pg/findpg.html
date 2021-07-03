@@ -1,5 +1,10 @@
 {% extends 'mypg/basic.html' %}
 {% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block seo %}
+<title>{{title}} | Apna Thikana: Book PGs online.</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="https://yourwebsite.com/">
+{% endblock seo %}
 {% block css %}
 .pg-card {
         text-decoration: none;

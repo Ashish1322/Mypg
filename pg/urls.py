@@ -18,21 +18,21 @@ from django.urls import path,include
 from . import views
 urlpatterns = [   
      
-     path('contact/', views.contact,name="contact"),
+     path('support-apna-thikana/', views.contact,name="contact"),
      path('findpg/', views.findpg,name="findpg"),
-     path('pgdetial/<str:slug>/', views.pgdetail,name="pgdetail"),
+     path('pg-details/<str:slug>/', views.pgdetail,name="pgdetail"),
      path('quicksearch/<str:slug>/', views.quicksearch,name="quicksearch"),
-     path('bookpg-form/<str:slug>/', views.book_pg_form,name="bookpgform"),
+     path('booking-form-pg/<str:slug>/', views.book_pg_form,name="bookpgform"),
      path('bookpg/<str:slug>/', views.book_pg,name="bookpg"),
-     path('userview/<str:slug>', views.userview,name="userview"),
+     path('account/<str:slug>', views.userview,name="userview"),
      path('changedetails/<str:slug>', views.change_details,name="changedetails"),
      path('changepassword/<str:slug>', views.changepassword,name="changepassword"),
-     path('registerpg/', views.registerpg,name="registerpg"),
+     path('registerpg-grow-business/', views.registerpg,name="registerpg"),
      path('testmotional',views.testm,name="testmotional"),
      path('cancelorder/<int:sno>',views.cancel,name="cancel"),
      path('payment-success',views.payment_success,name="payment_success"),
-     path('receipt/<int:sno>',views.receipt,name="receipt"),
-     path('wait/<int:sno>',views.show_load,name="loading"),
+     path('payment-success-receipt/<int:sno>',views.receipt,name="receipt"),
+     path('payment-processing/<int:sno>',views.show_load,name="loading"),
      
      
 ]

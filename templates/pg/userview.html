@@ -21,6 +21,11 @@ border: 2px grey;
 box-shadow: 5px 10px 7px rgb(119, 116, 116);
 }
 {% endblock css %}
+{% block seo %}
+<title>Apna Thikana: Welcome {{user.first_name}} </title>
+<meta name="description" content="Apna Thikana provides the best and affordable PG'S near Chandigarh University and CGC Colleges. We offers you a hassle free PG search without any service charge for Boys, Girls in Moahli, Jhanjeri, Landra.">
+<link rel="canonical" href="https://yourwebsite.com/">
+{% endblock seo %}
 {% block body %}
 
 <div class="text-center container my-2">

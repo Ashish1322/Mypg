@@ -411,6 +411,11 @@ form.sign-in-form {
 {% endblock css %}
 {% block body %}
 {% load static %}
+{% block seo %}
+<title>Apna Thikana - Login or SignUp</title>
+<meta name="description" content="Create an account or login into Apna Thikana. Start finding best and affordable pg's near colleges in Chandigarh and get updates.">
+<link rel="canonical" href="https://yourwebsite.com/">
+{% endblock seo %}
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
@@ -510,7 +515,7 @@ sign_in_btn.addEventListener("click", () => {
 });
 function activate_spinner()
 {
-  document.getElementById("sign_up_but").innerHTML = "<button  class='btn btn-primary'><span class='spinner-border spinner-border-sm'></span> Please Wait...</button>";
+  document.getElementById("sign_up_but").innerHTML = "<button  class='btn btn-primary'><span class='spinner-bosrder spinner-border-sm'></span> Please Wait...</button>";
 
 }
 function acitvate_spin()

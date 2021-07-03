@@ -54,6 +54,9 @@ def findpg(request):
         query = str(request.POST['query'])
         query = query.strip()
         query = query.split(" ")
+        # For html SEO
+        title = "Best affordable Paying Guests near Colleges in Chandigarh, Mohali."
+        description = "Book Best PGs near Jhanjeri, Landra, Chandigarh at affordable prices without any service charges with Apna Thikana. Apna Thikana provides you variety of PGs near Colleges in Chandigarh to book online."
         # For getting empty query set
         final_pgs = {}
         for i in query:            
@@ -70,7 +73,8 @@ def findpg(request):
             final_pgs =  pg.union(final_pgs)
         final_pgs = list(final_pgs)
         # Range is to print stars
-        return render(request,'pg/findpg.html',{'pgs':final_pgs,'range':range(1,6),'len':len(final_pgs)})
+
+        return render(request,'pg/findpg.html',{'pgs':final_pgs,'title':title,'description':description,'range':range(1,6),'len':len(final_pgs)})
 
     return HttpResponse("404 Error")
 
@@ -95,20 +99,36 @@ def pgdetail(request,slug):
 def quicksearch(request,slug):
     # Slug is the type of quick search
     pgs = [] # list to store results
+
+    # For html SEO
+    title = ""
+    description = ""
+
     if(slug=="paying-guests-cgc-jhanjeri-mohali-chandigarh"):
         pgs = Pg.objects.filter(location__contains = "Jhanjeri")
-        
+        title = "Best affordable PGs near CGC Jhanjeri, Punjab"
+        description = "Book Best PGs near Chandigarh Group of Colleges Jhanjeri at affordable prices without any service charges with Apna Thikana. Apna Thikana provides you variety of PGs near Colleges in Chandigarh to book online."
+
     elif(slug=="paying-guests-cgc-landra-mohali-chandigarh"):
         pgs = Pg.objects.filter(location__contains = "Landra")
+        title = "Best affordable PGs near CGC Landra, Punjab"
+        description = "Book Best PGs near Chandigarh Group of Colleges Landra at affordable prices without any service charges with Apna Thikana. Apna Thikana provides you variety of PGs near Colleges in Chandigarh to book online."
 
     elif(slug == "pgs-for-boys-cgc-jhanjeri-landra-chandigarh"):
         pgs = Pg.objects.filter(type_pg = "Boys")
-        
+        title = "Boys PGs in Jhanjeri, Landra, Chandigarh"
+        description = "Book PGs for Boys near Chandigarh Group of Colleges Jhanjeri, Landra at affordable prices without any service charges with Apna Thikana."
+
     elif(slug == "boys-girls-pg-near-cgc-chandigarh"):
         pgs = Pg.objects.all()
-        
+        title = "Best Affordable PG's in Jhanjeri, Landra, Chandigarh"
+        description = "Book PGs for students near Chandigarh Group of Colleges Jhanjeri, Landra at affordable prices without any service charges with Apna Thikana."
+
+
     elif(slug == "pgs-for-girls-cgc-jhanjeri-landra-chandgarh"):
         pgs = Pg.objects.filter(type_pg = "Girls")
+        title = "Girls PGs in Jhanjeri, Landra, Chandigarh"
+        description = "Book PGs for Girls near Chandigarh Group of Colleges Jhanjeri, Landra at affordable prices without any service charges with Apna Thikana."
         
     else:
         return HttpResponse("404 Error")
@@ -117,7 +137,7 @@ def quicksearch(request,slug):
     p = Paginator(pgs,6)
     page_number = request.GET.get('page') # for navigating between pages
     pgs_page = p.get_page(page_number) # current page
-    return render(request,'pg/findpg.html',{'pgs':pgs_page,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys",'page_range':p.page_range,}) # p.page_range is to show all the availbale pages for navigation which are fetching by get request in line 109
+    return render(request,'pg/findpg.html',{'pgs':pgs_page,'title':title,'description':description,'len':len(pgs),'range':range(1,6),'for':"Pg's for Boys",'page_range':p.page_range,}) # p.page_range is to show all the availbale pages for navigation which are fetching by get request in line 109
 
 # To show book pg form of selected pg
 def book_pg_form(request,slug):

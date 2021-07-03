@@ -1,6 +1,11 @@
 {% extends 'mypg/basic.html' %}
 {% block title %}Book Pg{% endblock title %}
 {% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block seo %}
+<title>{{pg.name}} Book online | Apna Thikana | Best Pg's in Chandigarh</title>
+<meta name="description" content="Book {{pg.name}} in {{pg.location}}, with Apna Thikana. We offers you a hassle free PG search and booking without any service charge for students in Mohali, Jhanjeri, Landra, Punjab.">
+<link rel="canonical" href="https://yourwebsite.com/">
+{% endblock seo %}
 {% block body %}
 {% if user.is_authenticated %}
 <div class="container">

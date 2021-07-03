@@ -32,12 +32,12 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home,name="home"),
-    path('login/', views.login_user,name="login"),
-    path('signup/', views.signup_user,name="signup"),
+    path('login-apna-thikana/', views.login_user,name="login"),
+    path('signup-apna-thikana/', views.signup_user,name="signup"),
     path('logout/', views.logout_user,name="logout"),
-    path('about/', views.about,name="about"),
-    path('policy/', views.policy,name="policy"),
-    path('conditions/', views.conditions,name="conditions"),
+    path('about-us/', views.about,name="about"),
+    path('privacy-policy/', views.policy,name="policy"),
+    path('terms-conditions/', views.conditions,name="conditions"),
     path('pg/', include('pg.urls')),
     # Password forgeeten urls
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='mypg/password_reset_done.html'), name='password_reset_done'),

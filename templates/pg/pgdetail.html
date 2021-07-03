@@ -1,6 +1,11 @@
 {% extends 'mypg/basic.html' %}
 
-{% block title %}{{pg.name}}{% endblock title %}
+{% block seo %}
+<title>{{pg.name}} at {{pg.location}}, Chandigarh | Apna Thikana : Book Pgs Online.</title>
+<meta name="description" content="{{pg.name}} best and affordable pgs in {{pg.location}}, Chandigarh, Mohali,book now with Apna Thikana without any service charges.">
+<link rel="canonical" href="https://yourwebsite.com/">
+{% endblock seo %}
+
 {% block css %}
 .gold{
 color: orange;
@@ -38,8 +43,8 @@ height: 370px;
 <!-- About Pg -->
 <div class="container my-2">
     <div class="text-center">
-        <h2 class="headings" style="display: inline; color:#1f9bd7 ;">About</h2>
-        <h2 class="headings" style="display: inline; color: #a73638;"> PG</h2>
+    
+        <h1 class="headings" style="display: inline; color: #a73638;">About {{pg.name}}</h1>
       </div>
     <div class="row my-3">
         <div class="col-md-6 col-xl-6 col-sm-12 col-12 widht_cont">
@@ -50,6 +55,7 @@ height: 370px;
             <div class="p-2">
                 <h2 class="subheadings">{{pg.name}}</h2>
                 <h4 style="color: grey;"><i class="fa fa-map-marker"></i> {{pg.location}}</h4>
+                <p style="display: none;">Best Pg's in Chandigarh, Mohali,Landra,Punjab, Near CGC Colleges and chandigarh University</p>
                 {% for i in range %}
                 <span><i class="fa fa-star gold"></i></span>
                 {% endfor %}
@@ -96,7 +102,7 @@ height: 370px;
             <div class="accordion-item">
               <h2 class="accordion-header" id="flush-headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  Detailed Information
+                  Detailed Information of Pg
                 </button>
               </h2>
               <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
