@@ -48,11 +48,19 @@ def signup_user(request):
         email = request.POST["signup_email"]
         password = request.POST["signup_password"]
         password2 = request.POST["signup_password_confirm"]
+
         # checking for valid data
+        try:
+            user = User.objects.filter(email=email)
+            messages.error(request,"An account with this email already exists, Please use diffrent email address.")
+            return redirect("home")
+        except Exception as e:
+            pass
         try:
             user = User.objects.get(username=user_name)
             messages.error(request,"User name already exists")
             return redirect('home')
+
         except Exception as e:
             if(password!=password2):
                 messages.error(request,"Password doesn't matches")
@@ -98,6 +106,7 @@ def policy(request):
 # Funtion to conditions page
 def conditions(request):
     return render(request,'mypg/terms_conditions.html')
+
 
 # Function to reset the password and send mail 
 def password_reset_request(request):

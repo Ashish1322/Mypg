@@ -4,6 +4,17 @@
 {% block link %}
 {% load static %}
 <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
+<!-- Script to generate the Captcha every time -->
+<script type="text/javascript">
+   function DrawCaptcha()
+    {
+    var a = Math.ceil(Math.random() * 6)+ '';
+    var b = Math.ceil(Math.random() * 10)+ '';
+    var code = a + '+' +b;
+    document.getElementById("txtCaptcha").innerText = code
+    }
+  </script>
 {% endblock link %}
 {% block css %}
 
@@ -78,6 +89,30 @@ form.sign-in-form {
   max-width: 380px;
   width: 100%;
   background-color: #f0f0f0;
+  margin: 6px 0;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+.captcha-box{
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 6px 0;
+  height: 55px;
+  border-radius: 55px;
+  
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+.captcha-input{
+    max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
   margin: 10px 0;
   height: 55px;
   border-radius: 55px;
@@ -86,6 +121,7 @@ form.sign-in-form {
   padding: 0 0.4rem;
   position: relative;
 }
+
 
 .input-field i {
   text-align: center;
@@ -105,6 +141,19 @@ form.sign-in-form {
   color: #333;
 }
 
+#txtInput {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+#txtInput::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
 .input-field input::placeholder {
   color: #aaa;
   font-weight: 500;
@@ -462,6 +511,23 @@ form.sign-in-form {
               <i class="fas fa-lock"></i>
               <input name="signup_password_confirm" type="password" placeholder="Confirm Password" required/>
             </div>
+            <div class="row captcha-box" >
+                <div class="col-md-2 col-2 my-auto">
+                  <i onclick="DrawCaptcha();" class="fas fa-sync-alt" ></i>
+                </div>
+                <div class="col-md-3 col-3 my-auto" style="background-image:url({% static 'other\captcha.png' %});">
+                  <p id="txtCaptcha"  style=" font-weight: 900; color: rgb(0, 0, 0); font-family:Modern; font-size: 1.5rem;"></p>
+                </div>
+                <div class="col-md-7 col-7 my-auto">
+                  <div >   
+                    <input  style="border-radius: 14px; outline: none; padding-left: 9px ;"  type="number"  oninput="check(this)"  required  id="txtInput" placeholder="Enter Sum here"/>
+                  </div>
+                </div>
+            </div>
+          
+
+           
+            
             <div id="sign_up_but">
             <input type="submit"  class="btn"  value="Sign up" />
           </div>
@@ -502,6 +568,11 @@ form.sign-in-form {
     </div>
 
     <script>
+
+      // Set captch on load
+   
+
+
     const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
@@ -523,5 +594,20 @@ function acitvate_spin()
   document.getElementById("lgin").innerHTML = "<button  class='btn btn-primary'><span class='spinner-border spinner-border-sm'></span> Please Wait...</button>";
 
 }
+
+// Validate the Entered input aganist the generated security code function
+function check(input) {
+  var cap =document.getElementById('txtCaptcha').innerText;
+  var a = math.evaluate(cap)
+
+if (input.value != a ) {
+  input.setCustomValidity("Answer is not valid. Please Try Again!");
+  } else {
+  // input is fine -- reset the error message
+  input.setCustomValidity('');
+  }
+  }
+
+document.onload(DrawCaptcha())
     </script>
 {% endblock body %}
