@@ -32,7 +32,8 @@ urlpatterns = [
      path('cancelorder/<int:sno>',views.cancel,name="cancel"),
      path('payment-success',views.payment_success,name="payment_success"),
      path('payment-success-receipt/<int:sno>',views.receipt,name="receipt"),
-     path('payment-processing/<int:sno>',views.show_load,name="loading"),
      
+     path('payment-processing/<int:sno>',views.show_load,name="loading"),
+    
      
 ]

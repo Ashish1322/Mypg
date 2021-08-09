@@ -1,0 +1,20 @@
+{% extends 'mypg/basic.html' %}
+{% block policyactive %}footer-active{% endblock policyactive %}
+{% block btn_on_contact_login %}btn{% endblock btn_on_contact_login %}
+{% block css %}
+ .smallpara {
+        font-size: 20px;
+
+        color: rgb(47, 46, 46);
+      }
+{% endblock css %}
+{% block body %}
+<div class="container" style="text-align: center;">
+{% load static %}
+    <h1 class="subheadings" style="text-align: center;" >Welcome to Apna Thikana</h1>
+<img src="{% static 'other\logo2.png' %}" alt="" height="15%" width="15%">
+    <p class="smallpara my-2" style="text-align: center;">We Provide you easy access to rental places near the colleges in chandigarh. Our service is absolutely free and  We ensure th quality of paying guests and the prices are affordable because you deserve the best. We are always here to help you with our 24x7 support. Login now and find perfect resident for you.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary my-3">Login Here</a>
+</div>
+
+{% endblock body %}

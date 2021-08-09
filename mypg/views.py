@@ -16,8 +16,16 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from mypg.settings import EMAIL_HOST_USER
+
 import smtplib
 from .settings import EMAIL_HOST_PASSWORD
+from django.urls import reverse
+
+# For sending activation key
+from django.utils.encoding  import DjangoUnicodeDecodeError,force_bytes,force_text
+from django.utils.http import urlsafe_base64_decode,urlsafe_base64_encode
+from django.contrib.sites.shortcuts import get_current_site
+from .utils import token_generator
 # Function to home page
 def home(request):
     r_pg = recommended.objects.all() # Recommended pgs from database shown on home page
@@ -51,7 +59,7 @@ def signup_user(request):
 
         # checking for valid data
         try:
-            user = User.objects.filter(email=email)
+            user = User.objects.get(email=email)
             messages.error(request,"An account with this email already exists, Please use diffrent email address.")
             return redirect("home")
         except Exception as e:
@@ -69,21 +77,56 @@ def signup_user(request):
                 messages.error(request,"Please enter valid name")
                 return redirect('home')
             user = User.objects.create_user(username=user_name,password=password,email=email,first_name = name)
+             # Saving the user but now account is not activate a confirmation link will be sent on given mail to activate account
+            user.is_active = False
             user.save()
-            # Sending Welcome Email to user
-            msg = EmailMessage()
-            msg['Subject'] = 'Welcome to the Apna Thikana'
-            msg['From'] = EMAIL_HOST_USER
-            msg['To'] = email
-            content = render_to_string('pg/welcome.txt',{'name':name})
-            msg.set_content(content,subtype='html')
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-                smtp.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
-                smtp.send_message(msg)
-            # Success mesaage  on home page
-            messages.success(request,"Account created successfully")
+            # Content of activation email
+            domain = get_current_site(request).domain
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+         
+            link =  reverse('activate',kwargs={'uidb64':uidb64,'token':token_generator.make_token(user)})
+            # Sending Account Activation email to user
+            subjet = "Activate your account"
+            activate_url = "http://"+domain+link
+            body = "Hi "+user.username + "Please use this link to verify your account\n"+activate_url
+            send_mail(
+                subjet,
+                body,
+                'noreply@semicolon.com',
+                [email],
+                fail_silently=False,
+            )
+            messages.warning(request,"The Activation link has been sent on the provided email. Kindly check your mail and activate your account")
             return redirect('home')
+
     return HttpResponse("404 Error")
+
+# Function on which user land when he click on the activation email or token are verified of his account on signup
+def get(request,uidb64,token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except Exception as e:
+        user = None
+    if user is not None and token_generator.check_token(user,token):
+        user.is_active = True
+        user.save()
+       # if everthing is fine then Sending Welcome Email to user when account is activated
+        msg = EmailMessage()
+        msg['Subject'] = 'Welcome to the Apna Thikana'
+        msg['From'] = EMAIL_HOST_USER
+        msg['To'] = user.email
+        content = render_to_string('pg/welcome.txt',{'name':user.first_name})
+        msg.set_content(content,subtype='html')
+        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+            smtp.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
+            smtp.send_message(msg)
+                 
+        messages.success(request,"Your account has been verified and activated succesfully. Hoping for your better experience.")
+        return render(request,"mypg/account-activation.html")
+
+    messages.error(request,"There is some problem in link so please Try again.")
+    return redirect("home")
 
 # Function to logout the user
 def logout_user(request):
