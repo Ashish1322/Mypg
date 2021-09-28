@@ -20,14 +20,14 @@ EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'a.m2001nov@gmail.com'
-EMAIL_HOST_PASSWORD = 'pxvjntwntyghnwxg'
+EMAIL_HOST_USER = 'email_here'
+EMAIL_HOST_PASSWORD = 'passswordd_here'
 
 
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '63x-$@)p@hxe2qo3+8pc0@6d615lz(+$j44e6nt5unnt4uius*'
+SECRET_KEY = 'Secret key here'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pgdatabase',
         'USER': 'root',
-        'PASSWORD': 'Ramta2000#',
+        'PASSWORD': 'password_here',
         'HOST': 'localhost',
         'PORT': '3306',
 }
@@ -145,5 +145,3 @@ MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 # Activate Django-Heroku.
 
-# user = 'a'
-# pass ='1111'
