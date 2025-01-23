@@ -29,7 +29,7 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/apna-thikana.git
+   git clone https://github.com/Ashish1322/Mypg.git
    ```
 
 2. Navigate to the project directory:
